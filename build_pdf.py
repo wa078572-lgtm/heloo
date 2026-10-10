@@ -184,5 +184,5 @@ def footer(c, doc):
 
 doc = SimpleDocTemplate(out_path, pagesize=A4, leftMargin=M, rightMargin=M, topMargin=M, bottomMargin=1.8 * cm,
                         title='Lab Assignment 9, 10 - Waleed Ahmad', author='Waleed Ahmad')
-doc.build(story, onFirstPage=footer, onLaterPages=footer)
+doc.build(story)
 print('built', out_path)
