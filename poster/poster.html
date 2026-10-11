@@ -8,170 +8,119 @@
   :root {
     --teal: #0f766e; --teal2: #14b8a6; --teal-dark: #0b5650; --tint: #e6f2ef; --bg: #f3f7f6;
     --line: #cfe3df; --ink: #1d2433; --muted: #4a5568;
-    --red: #d03b3b; --red-bg: #fdf0f0; --amber: #fab219; --amber-ink: #8a5a00; --green: #0ca30c; --green-bg: #effaef;
-    --mock: #8a8778;
+    --red: #d03b3b; --red-bg: #fdf0f0; --amber: #fab219; --green: #0ca30c; --green-bg: #effaef;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: #fff; }
   body { font-family: "Inter", "Segoe UI", Arial, sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .poster { width: 22.5in; height: 34.5in; position: relative; overflow: hidden; background: var(--bg);
-            display: flex; flex-direction: column; }
+  .poster { width: 22.5in; height: 34.5in; overflow: hidden; background: var(--bg); display: flex; flex-direction: column; }
 
-  /* ---------- header ---------- */
+  /* header */
   .header { background: linear-gradient(120deg, var(--teal-dark) 0%, var(--teal) 45%, var(--teal2) 100%); color: #fff;
-            padding: 40px 60px 46px; display: grid; grid-template-columns: 1fr 690px; gap: 44px; position: relative; }
+            padding: 48px 64px 56px; display: grid; grid-template-columns: 1fr 640px; gap: 56px; position: relative; }
   .header::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 12px;
                    background: linear-gradient(90deg, var(--red) 0 33.3%, var(--amber) 33.3% 66.6%, var(--green) 66.6% 100%); }
   .inst { display: flex; align-items: center; gap: 28px; }
-  .logo { width: 150px; height: 150px; border-radius: 50%; background: #fff; padding: 6px; flex: none;
-          box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+  .logo { width: 150px; height: 150px; border-radius: 50%; background: #fff; padding: 6px; flex: none; box-shadow: 0 6px 18px rgba(0,0,0,.18); }
   .logo img { width: 100%; height: 100%; border-radius: 50%; }
-  .inst .u { font-size: 44px; font-weight: 800; letter-spacing: .5px; line-height: 1.1; }
+  .inst .u { font-size: 46px; font-weight: 800; line-height: 1.1; }
   .inst .d { font-size: 30px; font-weight: 500; opacity: .95; margin-top: 6px; }
-  .kicker { margin-top: 26px; display: inline-block; font-size: 26px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-            background: rgba(255,255,255,.16); border: 2px solid rgba(255,255,255,.4); border-radius: 30px; padding: 6px 22px; }
-  h1 { font-size: 74px; line-height: 1.08; margin: 18px 0 12px; font-weight: 800; letter-spacing: -1.5px; white-space: nowrap; }
+  h1 { font-size: 82px; line-height: 1.06; margin: 46px 0 18px; font-weight: 800; letter-spacing: -1.5px; }
   h1 span { color: #b8f5ea; }
-  .sub { font-size: 33px; line-height: 1.3; font-weight: 500; opacity: .96; max-width: 1150px; text-wrap: balance; }
-  .people { display: flex; gap: 50px; margin-top: 26px; }
-  .person { display: flex; align-items: center; gap: 20px; }
-  .photo { width: 116px; height: 116px; border-radius: 50%; border: 5px solid #fff; background: rgba(255,255,255,.18) center/cover no-repeat;
+  .sub { font-size: 36px; font-weight: 500; opacity: .96; }
+  .people { display: flex; gap: 60px; margin-top: 40px; }
+  .person { display: flex; align-items: center; gap: 22px; }
+  .photo { width: 120px; height: 120px; border-radius: 50%; border: 5px solid #fff; background: rgba(255,255,255,.18) center/cover no-repeat;
            display: flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1.2; text-align: center; color: #e6fffb; flex: none; }
   .person .role { font-size: 22px; letter-spacing: 2px; text-transform: uppercase; opacity: .85; font-weight: 700; }
-  .person .name { font-size: 38px; font-weight: 800; line-height: 1.15; }
+  .person .name { font-size: 40px; font-weight: 800; line-height: 1.15; }
   .person .meta { font-size: 28px; opacity: .95; }
+  .goals { background: #fff; color: var(--ink); border-radius: 28px; padding: 40px 44px; box-shadow: 0 14px 40px rgba(0,0,0,.22);
+           display: flex; flex-direction: column; justify-content: center; }
+  .goals h2 { margin: 0 0 26px; font-size: 52px; color: var(--teal); }
+  .goals ul { margin: 0; padding: 0; list-style: none; }
+  .goals li { display: flex; align-items: center; gap: 20px; font-size: 34px; font-weight: 600; line-height: 1.2; margin-bottom: 24px; }
+  .goals li:last-child { margin-bottom: 0; }
+  .goals li i { flex: none; width: 50px; height: 50px; border-radius: 14px; background: var(--tint); color: var(--teal);
+                font-style: normal; font-weight: 800; font-size: 30px; display: flex; align-items: center; justify-content: center; }
 
-  .goals { background: #fff; color: var(--ink); border-radius: 26px; padding: 28px 36px 18px; align-self: stretch;
-           box-shadow: 0 14px 40px rgba(0,0,0,.22); }
-  .goals h2 { margin: 0 0 16px; font-size: 50px; color: var(--teal); display: flex; align-items: center; gap: 16px; }
-  .goals h2 .ico { width: 58px; height: 58px; border-radius: 50%; background: var(--teal); color: #fff; display: inline-flex;
-                   align-items: center; justify-content: center; font-size: 34px; }
-  .goals ol { margin: 0; padding: 0; list-style: none; counter-reset: g; }
-  .goals li { counter-increment: g; position: relative; padding-left: 64px; font-size: 30px; line-height: 1.26; margin: 0 0 16px; }
-  .goals li::before { content: counter(g); position: absolute; left: 0; top: 0; width: 46px; height: 46px; border-radius: 12px;
-                      background: var(--tint); color: var(--teal); font-weight: 800; font-size: 28px; display: flex; align-items: center; justify-content: center; }
-  .goals b { color: var(--teal-dark); }
+  .wrap { padding: 0 64px; }
+  .sec { margin-top: 44px; }
+  h3 { margin: 0 0 22px; font-size: 50px; line-height: 1.1; display: flex; align-items: center; gap: 18px; }
+  h3::before { content: ""; width: 12px; height: 50px; border-radius: 6px; background: var(--teal); }
+  .card { background: #fff; border-radius: 24px; border: 2px solid var(--line); padding: 32px 36px; box-shadow: 0 4px 14px rgba(15,118,110,.06); }
 
-  /* ---------- body ---------- */
-  .body { flex: 1; display: grid; grid-template-columns: 650px 650px 1fr; gap: 40px; padding: 26px 56px 0; min-height: 0; }
-  .col { display: flex; flex-direction: column; gap: 24px; min-height: 0; }
-  .card { background: #fff; border-radius: 22px; border: 2px solid var(--line); padding: 22px 28px 24px; box-shadow: 0 4px 14px rgba(15,118,110,.06); }
-  .card.grow { flex: 1; }
-  .card.spread { display: flex; flex-direction: column; justify-content: space-between; }
-  h3 { margin: 0 0 16px; font-size: 42px; line-height: 1.1; color: var(--ink); display: flex; align-items: center; gap: 14px; }
-  h3 .n { width: 54px; height: 54px; border-radius: 14px; background: var(--teal); color: #fff; font-size: 30px;
-          display: inline-flex; align-items: center; justify-content: center; flex: none; }
-  p { margin: 0; font-size: 30px; line-height: 1.32; }
-  ul.b { margin: 0; padding: 0; list-style: none; }
-  ul.b li { position: relative; padding-left: 36px; font-size: 30px; line-height: 1.3; margin-bottom: 12px; }
-  ul.b li::before { content: ""; position: absolute; left: 4px; top: 14px; width: 14px; height: 14px; border-radius: 4px; background: var(--teal); }
-  ul.b li.r::before { background: var(--red); }
-  .hl { color: var(--red); font-weight: 700; }
-  b.t { color: var(--teal); }
-
-  /* three-way */
-  .tri { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-  .tri div { border: 2px solid var(--line); background: var(--bg); border-radius: 16px; padding: 14px 8px; text-align: center; font-size: 24px; line-height: 1.25; }
-  .tri b { display: block; color: var(--teal); font-size: 27px; font-weight: 800; letter-spacing: .5px; margin-bottom: 4px; }
-  .tri small { display: block; font-size: 22px; color: var(--muted); margin-top: 4px; }
-  .compare { text-align: center; font-size: 26px; font-weight: 700; color: var(--teal); margin: 8px 0 0; letter-spacing: 1px; }
-  .out { border-radius: 14px; padding: 12px 18px; font-size: 25px; line-height: 1.28; margin-top: 10px; border: 2px solid; }
-  .out b { font-size: 27px; }
-  .out.ok { border-color: var(--green); background: var(--green-bg); } .out.ok b { color: #087408; }
-  .out.bad { border-color: var(--red); background: var(--red-bg); } .out.bad b { color: #b52f2f; }
-
-  /* numbers band */
-  .band { display: grid; grid-template-columns: repeat(10, 1fr); gap: 14px; padding: 26px 56px 0; }
-  .band div { background: #fff; border: 2px solid var(--line); border-top: 8px solid var(--teal); border-radius: 16px; padding: 10px 8px 12px; text-align: center; }
-  .band span { display: block; font-size: 54px; font-weight: 800; color: var(--teal); line-height: 1.05; }
-  .band em { display: block; font-style: normal; font-size: 21px; line-height: 1.2; color: var(--muted); margin-top: 4px; }
   /* numbers */
-  .nums { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .num { background: var(--bg); border-radius: 14px; border-left: 8px solid var(--teal); padding: 10px 16px; display: flex; align-items: center; gap: 16px; }
-  .num span { font-size: 50px; font-weight: 800; color: var(--teal); line-height: 1; min-width: 86px; }
-  .num em { font-style: normal; font-size: 23px; line-height: 1.2; color: var(--muted); }
-  .num.w span { font-size: 44px; }
+  .nums { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin-top: 40px; }
+  .nums div { background: #fff; border: 2px solid var(--line); border-top: 10px solid var(--teal); border-radius: 18px; padding: 16px; text-align: center; }
+  .nums span { display: block; font-size: 72px; font-weight: 800; color: var(--teal); line-height: 1.05; }
+  .nums em { display: block; font-style: normal; font-size: 28px; color: var(--muted); margin-top: 4px; }
 
-  /* architecture */
-  .srcs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .src { border: 2px solid var(--line); background: var(--bg); border-radius: 12px; padding: 8px 12px; font-size: 22px; line-height: 1.22; }
-  .src b { font-size: 24px; display: block; }
-  .src.mock { border-style: dashed; background: #f6f4ee; }
-  .tag { display: inline-block; font-size: 17px; font-weight: 800; padding: 1px 9px; border-radius: 10px; background: var(--teal); color: #fff; margin-left: 6px; vertical-align: 3px; text-transform: uppercase; letter-spacing: .5px; }
-  .tag.m { background: var(--mock); }
-  .down { text-align: center; color: var(--teal); font-size: 40px; line-height: 1; margin: 6px 0; font-weight: 800; }
-  .pipe { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr 22px 1fr; align-items: center; }
-  .pipe .p { background: var(--teal); color: #fff; border-radius: 14px; padding: 10px 6px; text-align: center; font-size: 21px; line-height: 1.2; min-height: 112px;
-             display: flex; flex-direction: column; justify-content: center; }
-  .pipe .p b { font-size: 24px; display: block; margin-bottom: 4px; }
-  .pipe .a { color: var(--teal); font-weight: 800; font-size: 26px; text-align: center; }
+  /* what */
+  .what { display: grid; grid-template-columns: 640px 1fr; gap: 40px; align-items: stretch; }
+  .lead { font-size: 38px; line-height: 1.32; margin: 0 0 30px; }
+  .lead b { color: var(--teal); }
+  .does { display: grid; gap: 18px; }
+  .does div { display: flex; align-items: center; gap: 20px; font-size: 32px; font-weight: 600; }
+  .ic { flex: none; width: 64px; height: 64px; border-radius: 18px; background: var(--teal); display: flex; align-items: center; justify-content: center; }
+  .ic svg { width: 36px; height: 36px; stroke: #fff; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .hero { margin: 0; display: flex; flex-direction: column; }
+  .hero img { width: 100%; display: block; border-radius: 16px; border: 2px solid var(--line); box-shadow: 0 10px 30px rgba(15,118,110,.14); }
+  .hero figcaption, .shot figcaption { font-size: 28px; margin-top: 14px; color: var(--muted); }
+  .hero figcaption b, .shot figcaption b { color: var(--ink); }
+  .pill { display: inline-block; font-weight: 800; padding: 0 12px; border-radius: 10px; color: #fff; }
+  .pill.r { background: var(--red); } .pill.a { background: var(--amber); color: #3d2a00; }
 
-  /* EIA table */
-  table.eia { width: 100%; border-collapse: separate; border-spacing: 0 8px; margin: -8px 0 -8px; }
-  table.eia td { font-size: 23px; line-height: 1.22; padding: 8px 12px; background: var(--bg); vertical-align: middle; }
-  table.eia td:first-child { border-radius: 12px 0 0 12px; background: var(--teal); color: #fff; font-weight: 800; font-size: 24px; width: 190px; }
-  table.eia td:last-child { border-radius: 0 12px 12px 0; }
-  table.eia .pg { display: block; color: var(--teal); font-weight: 700; font-size: 21px; margin-top: 3px; }
+  /* how */
+  .how { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .tri { display: flex; align-items: center; gap: 14px; }
+  .tri .b { flex: 1; align-self: stretch; text-align: center; border-radius: 18px; background: var(--bg); border: 2px solid var(--line); padding: 20px 8px; }
+  .tri .b b { display: block; font-size: 30px; color: var(--teal); letter-spacing: .5px; }
+  .tri .b span { font-size: 25px; color: var(--muted); }
+  .tri .op { font-size: 40px; font-weight: 800; color: var(--teal); }
+  .res { display: flex; gap: 16px; margin-top: 20px; }
+  .res div { flex: 1; border-radius: 16px; padding: 14px 16px; font-size: 28px; font-weight: 700; text-align: center; border: 2px solid; }
+  .res .ok { border-color: var(--green); background: var(--green-bg); color: #087408; }
+  .res .bad { border-color: var(--red); background: var(--red-bg); color: #b52f2f; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 10px; }
+  .srcs span { font-size: 25px; font-weight: 700; color: var(--teal-dark); background: var(--tint); border: 2px solid var(--line); border-radius: 30px; padding: 4px 18px; }
+  .srcs span.m { background: #f6f4ee; border-style: dashed; color: #6b6858; }
+  .down { color: var(--teal); font-size: 40px; font-weight: 800; text-align: center; line-height: 1; margin: 12px 0; }
+  .pipe { display: flex; align-items: center; gap: 10px; }
+  .pipe div { flex: 1; background: var(--teal); color: #fff; border-radius: 16px; padding: 22px 6px; text-align: center; font-size: 28px; font-weight: 800; }
+  .pipe i { color: var(--teal); font-style: normal; font-weight: 800; font-size: 32px; }
 
-  /* change flow */
-  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 6px; }
-  .st { border-radius: 30px; padding: 7px 16px; font-size: 23px; font-weight: 700; background: var(--tint); border: 2px solid var(--teal); color: var(--teal); white-space: nowrap; }
-  .st.f { background: var(--teal); color: #fff; }
-  .st.r { border-color: var(--red); color: #b52f2f; background: var(--red-bg); }
-  .fa { color: var(--teal); font-weight: 800; font-size: 24px; }
-  .note { font-size: 24px; line-height: 1.3; margin-top: 14px; color: var(--muted); }
-  .note b { color: var(--ink); }
+  /* gallery */
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .shot { margin: 0; }
+  .shot img { width: 100%; display: block; border-radius: 14px; border: 2px solid var(--line); box-shadow: 0 8px 22px rgba(15,118,110,.12); }
+  .shot figcaption { margin-top: 12px; }
+  .shot figcaption b { display: block; font-size: 32px; }
 
-  /* rules */
-  .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .rule { border-radius: 12px; padding: 8px 12px; font-size: 22px; line-height: 1.2; border: 2px solid #e3e1ea; background: #fafafa; border-left-width: 8px; }
-  .rule b { font-size: 24px; display: block; }
-  .rule.c { border-left-color: var(--red); } .rule.c b { color: #b52f2f; }
-  .rule.w { border-left-color: var(--amber); } .rule.w b { color: var(--amber-ink); }
-  .sev { display: flex; gap: 28px; margin-top: 14px; font-size: 22px; font-weight: 600; color: var(--muted); }
-  .sev i { display: inline-block; width: 18px; height: 18px; border-radius: 4px; vertical-align: -2px; margin-right: 6px; }
-
-  /* results */
-  .shot { margin: 0 0 18px; }
-  .shot:last-child { margin-bottom: 0; }
-  .shot .cap { display: flex; gap: 14px; align-items: flex-start; font-size: 26px; line-height: 1.28; margin-bottom: 10px; }
-  .shot .cap .k { flex: none; font-size: 20px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #fff; border-radius: 8px; padding: 4px 12px; margin-top: 2px; }
-  .k.g { background: var(--green); } .k.r { background: var(--red); } .k.t { background: var(--teal); }
-  .shot img { width: 100%; display: block; border-radius: 12px; border: 2px solid var(--line); }
-  .badge { display: inline-block; font-weight: 800; padding: 0 8px; border-radius: 8px; }
-  .badge.r { color: #fff; background: var(--red); } .badge.a { color: #3d2a00; background: var(--amber); } .badge.g { color: #fff; background: var(--green); }
-
-  /* bottom band */
-  .bottom { display: grid; grid-template-columns: 1.6fr 1fr 1.1fr; gap: 40px; padding: 30px 56px 0; }
-  .timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; margin-top: 6px; }
-  .timeline::before { content: ""; position: absolute; left: 6%; right: 6%; top: 34px; height: 8px; background: var(--teal); border-radius: 4px; }
-  .ph { position: relative; text-align: center; padding: 0 8px; display: flex; flex-direction: column; align-items: center; }
-  .ph .dot { width: 76px; height: 76px; border-radius: 50%; background: var(--teal); color: #fff; font-weight: 800; font-size: 34px;
-             display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; border: 6px solid #fff; box-shadow: 0 0 0 3px var(--teal); position: relative; }
-  .ph b { display: block; font-size: 25px; line-height: 1.2; color: var(--teal-dark); margin-bottom: 6px; }
-  .ph span { display: block; font-size: 21px; line-height: 1.25; color: var(--muted); }
-  .ph .done { display: inline-block; margin-top: auto; position: relative; top: 10px; font-size: 19px; font-weight: 800; color: #087408; background: var(--green-bg); border: 2px solid var(--green); border-radius: 20px; padding: 1px 12px; }
+  /* bottom */
+  .bottom { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 32px; }
+  .timeline { display: grid; grid-template-columns: repeat(5, 1fr); position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 10%; right: 10%; top: 36px; height: 8px; background: var(--teal); border-radius: 4px; }
+  .ph { position: relative; text-align: center; }
+  .ph .dot { width: 80px; height: 80px; border-radius: 50%; background: var(--teal); color: #fff; font-weight: 800; font-size: 34px;
+             display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; border: 6px solid #fff; box-shadow: 0 0 0 3px var(--teal); }
+  .ph b { font-size: 27px; color: var(--teal-dark); }
+  .status { margin-top: 22px; text-align: center; font-size: 26px; font-weight: 700; color: #087408; }
   ul.chk { margin: 0; padding: 0; list-style: none; }
-  ul.chk li { position: relative; padding-left: 44px; font-size: 26px; line-height: 1.26; margin-bottom: 11px; }
-  ul.chk li::before { content: "\2713"; position: absolute; left: 0; top: 0; width: 32px; height: 32px; border-radius: 8px; background: var(--green); color: #fff;
-                      font-weight: 800; font-size: 22px; display: flex; align-items: center; justify-content: center; }
-  .concl { font-size: 27px; line-height: 1.3; }
-  .concl b { color: var(--teal-dark); }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-  .chip { font-size: 20px; font-weight: 700; color: var(--teal-dark); background: var(--tint); border: 2px solid var(--line); border-radius: 20px; padding: 2px 13px; }
-  .fw { margin-top: 14px; font-size: 22px; line-height: 1.3; color: var(--muted); }
-  .fw b { color: var(--ink); }
+  ul.chk li { position: relative; padding-left: 50px; font-size: 30px; line-height: 1.25; margin-bottom: 16px; }
+  ul.chk li::before { content: "\2713"; position: absolute; left: 0; top: 1px; width: 36px; height: 36px; border-radius: 9px; background: var(--green); color: #fff;
+                      font-weight: 800; font-size: 24px; display: flex; align-items: center; justify-content: center; }
+  .chips { display: flex; flex-wrap: wrap; gap: 12px; }
+  .chip { font-size: 27px; font-weight: 700; color: var(--teal-dark); background: var(--tint); border: 2px solid var(--line); border-radius: 26px; padding: 6px 18px; }
 
-  .footer { margin-top: 30px; background: var(--teal-dark); color: #e6fffb; padding: 18px 56px; font-size: 21px; line-height: 1.35;
+  .footer { margin-top: auto; background: var(--teal-dark); color: #e6fffb; padding: 22px 64px; font-size: 24px;
             display: flex; justify-content: space-between; gap: 40px; align-items: center; }
   .footer b { color: #fff; }
-  .footer .r { white-space: nowrap; font-weight: 700; }
 </style>
 </head>
 <body>
 <div class="poster">
 
-  <!-- ===== HEADER: title, members, supervisor (left) + project goals (right) ===== -->
   <header class="header">
     <div>
       <div class="inst">
@@ -181,9 +130,8 @@
           <div class="d">Department of Management Sciences &middot; BS (Business Data Analytics)</div>
         </div>
       </div>
-      <div class="kicker">Final Year Project</div>
       <h1>Configuration Control Dashboard<br><span>for the Google Pixel&nbsp;7</span></h1>
-      <div class="sub">Automated configuration management with live drift detection on real public data</div>
+      <div class="sub">One live view of every part, version and approved change</div>
       <div class="people">
         <div class="person">
           <div class="photo" style="background-image:url('assets/student.jpg')">Student<br>photo</div>
@@ -191,201 +139,108 @@
         </div>
         <div class="person">
           <div class="photo" style="background-image:url('assets/supervisor.jpg')">Supervisor<br>photo</div>
-          <div><div class="role">Supervisor</div><div class="name">[Supervisor Name]</div><div class="meta">Dept. of Management Sciences</div></div>
+          <div><div class="role">Supervisor</div><div class="name">[Supervisor Name]</div><div class="meta">Management Sciences</div></div>
         </div>
       </div>
     </div>
-
     <div class="goals">
-      <h2><span class="ico">&#10148;</span>Project Goals</h2>
-      <ol>
-        <li>Implement the <b>four core functions of ANSI/EIA-649</b> configuration management in one dashboard</li>
-        <li>Detect <b>configuration drift automatically</b> for every item and every variant</li>
-        <li>Trace <b>every change to an approved</b> Engineering Change Request (ECR)</li>
-        <li>Answer an <b>auditor in seconds</b>, not days</li>
-        <li>Prove it on the <b>real public history</b> of the Google Pixel&nbsp;7</li>
-      </ol>
+      <h2>Project Goals</h2>
+      <ul>
+        <li><i>1</i>Track every item and variant</li>
+        <li><i>2</i>Approve every change</li>
+        <li><i>3</i>Detect drift automatically</li>
+        <li><i>4</i>Audit-ready in seconds</li>
+      </ul>
     </div>
   </header>
 
-  <!-- ===== KEY NUMBERS ===== -->
-  <section class="band">
-    <div><span>194</span><em>configuration items</em></div>
-    <div><span>73</span><em>real Pixel 7 builds</em></div>
-    <div><span>8,212</span><em>sourced versions</em></div>
-    <div><span>12</span><em>variants</em></div>
-    <div><span>7</span><em>data sources (6 real)</em></div>
-    <div><span>35</span><em>historical ECRs</em></div>
-    <div><span>11</span><em>baselines 2022&ndash;2026</em></div>
-    <div><span>6</span><em>drift rules</em></div>
-    <div><span>8</span><em>dashboard pages</em></div>
-    <div><span>104</span><em>tests passing</em></div>
-  </section>
+  <div class="wrap">
+    <div class="nums">
+      <div><span>194</span><em>tracked items</em></div>
+      <div><span>73</span><em>real Pixel 7 builds</em></div>
+      <div><span>12</span><em>phone variants</em></div>
+      <div><span>6</span><em>drift rules</em></div>
+      <div><span>104</span><em>tests passing</em></div>
+    </div>
 
-  <!-- ===== BODY: three columns ===== -->
-  <main class="body">
-
-    <!-- Column 1 -->
-    <section class="col">
+    <section class="sec what">
       <div class="card">
-        <h3><span class="n">1</span>The Problem</h3>
-        <p style="margin-bottom:14px">A phone has <b>~200 tracked items</b> (chips, firmware, software, parts, certificates), sold in many variants, and something changes every month. Without control:</p>
-        <ul class="b">
-          <li class="r">Nobody knows exactly what is in each variant <b>right now</b></li>
-          <li class="r">Changes slip in <span class="hl">without approval</span></li>
-          <li class="r">Regions get <b>left behind</b> on old software</li>
-          <li class="r">Proving the configuration to an auditor <b>takes days</b></li>
+        <h3>What is the CCD?</h3>
+        <p class="lead">A web dashboard that shows <b>what is inside every Pixel&nbsp;7 variant</b> and raises an alarm when anything <b>changes without approval</b>.</p>
+        <div class="does">
+          <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>Register of all parts</div>
+          <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4-8 4-8-4 8-4z"/><path d="M4 12l8 4 8-4M4 17l8 4 8-4"/></svg></span>Approved baselines</div>
+          <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h11M4 17h7M15 4l4 3-4 3M11 14l4 3-4 3"/></svg></span>Change requests (Jira)</div>
+          <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l9 16H3L12 3z"/><path d="M12 10v4M12 17h.01"/></svg></span>Drift alerts</div>
+          <div><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M8 12l3 3 5-6"/></svg></span>Compatibility check</div>
+          <div><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h7"/></svg></span>One-click audit report</div>
+        </div>
+      </div>
+      <figure class="hero">
+        <img src="assets/hero_overview.png" alt="CCD overview page showing 3 critical and 1 warning finding">
+        <figcaption><b>Live demo:</b> an unapproved firmware change is caught instantly: <span class="pill r">3 Critical</span> <span class="pill a">1 Warning</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="sec">
+      <h3>How It Works</h3>
+      <div class="how">
+        <div class="card">
+          <div class="tri">
+            <div class="b"><b>APPROVED</b><span>baseline</span></div><div class="op">+</div>
+            <div class="b"><b>ACTUAL</b><span>GitHub, PLM</span></div><div class="op">+</div>
+            <div class="b"><b>AUTHORIZED</b><span>Jira ECRs</span></div>
+          </div>
+          <div class="res"><div class="ok">&#10003; Match: compliant</div><div class="bad">&#9679; Mismatch: alarm</div></div>
+        </div>
+        <div class="card">
+          <div class="srcs"><span>Google builds</span><span>AOSP</span><span>Bulletins</span><span>GitHub</span><span>Jira</span><span class="m">PLM (mock)</span></div>
+          <div class="down">&#8595;</div>
+          <div class="pipe"><div>Sync</div><i>&rarr;</i><div>Database</div><i>&rarr;</i><div>Engine</div><i>&rarr;</i><div>Dashboard</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h3>Inside the Dashboard</h3>
+      <div class="gallery">
+        <figure class="shot"><img src="assets/g_matrix.png" alt="Variant matrix"><figcaption><b>Variant Matrix</b>Red = differs from approved</figcaption></figure>
+        <figure class="shot"><img src="assets/g_compat.png" alt="Compatibility checker"><figcaption><b>Compatibility Checker</b>Blocks builds that don&rsquo;t fit</figcaption></figure>
+        <figure class="shot"><img src="assets/g_audit.png" alt="Audit report"><figcaption><b>Audit Report</b>CSV and PDF in one click</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="sec bottom">
+      <div class="card">
+        <h3>Project Plan</h3>
+        <div class="timeline">
+          <div class="ph"><div class="dot">1</div><b>Research</b></div>
+          <div class="ph"><div class="dot">2</div><b>Data &amp; Sync</b></div>
+          <div class="ph"><div class="dot">3</div><b>Engine</b></div>
+          <div class="ph"><div class="dot">4</div><b>Dashboard</b></div>
+          <div class="ph"><div class="dot">5</div><b>Testing</b></div>
+        </div>
+        <div class="status">&#10003; All phases complete</div>
+      </div>
+      <div class="card">
+        <h3>Deliverables</h3>
+        <ul class="chk">
+          <li>8-page dashboard</li>
+          <li>Live data sync</li>
+          <li>Drift detection</li>
+          <li>Audit reports</li>
         </ul>
       </div>
-
       <div class="card">
-        <h3><span class="n">2</span>The Solution</h3>
-        <p style="font-size:27px;margin-bottom:16px">For every item and variant, the CCD compares <b>three</b> things:</p>
-        <div class="tri">
-          <div><b>APPROVED</b>Active baseline<small>what it should be</small></div>
-          <div><b>ACTUAL</b>GitHub + PLM<small>what is deployed</small></div>
-          <div><b>AUTHORIZED</b>Jira ECRs<small>what was approved</small></div>
-        </div>
-        <div class="compare">&#8595;&nbsp; compare &nbsp;&#8595;</div>
-        <div class="out ok"><b>&#10003; Match, or covered by an approved ECR</b><br>Compliant: green, traceable to the ECR</div>
-        <div class="out bad"><b>&#9679; Differs with no approved ECR</b><br>Critical &ldquo;unauthorized change&rdquo; alarm</div>
-      </div>
-
-      <div class="card grow">
-        <h3><span class="n">3</span>Change Control</h3>
-        <div class="flow">
-          <span class="st">Open</span><span class="fa">&rarr;</span>
-          <span class="st">Impact Review</span><span class="fa">&rarr;</span>
-          <span class="st">CCB Review</span><span class="fa">&rarr;</span>
-          <span class="st f">Approved</span><span class="fa">&rarr;</span>
-          <span class="st">Promote baseline</span><span class="fa">&rarr;</span>
-          <span class="st f">Implemented</span>
-          <span class="fa" style="margin-left:6px">&#8627;</span><span class="st r">Rejected: alarm stays</span>
-        </div>
-        <div class="note">Promote <b>refuses anything unapproved</b>. Each approved baseline is sealed with a <b>SHA-256 fingerprint</b>, so tampering is detected.</div>
-      </div>
-
-    </section>
-
-    <!-- Column 2 -->
-    <section class="col">
-      <div class="card">
-        <h3><span class="n">4</span>Architecture</h3>
-        <div class="srcs">
-          <div class="src"><b>Factory images <span class="tag">real</span></b>73 builds, bootloader + radio</div>
-          <div class="src"><b>AOSP source <span class="tag">real</span></b>7,800+ commits, tags</div>
-          <div class="src"><b>Bulletins <span class="tag">real</span></b>952 CVEs, patch levels</div>
-          <div class="src"><b>FCC, iFixit <span class="tag">real</span></b>hardware facts</div>
-          <div class="src"><b>GitHub config <span class="tag">real</span></b>ACTUAL software state</div>
-          <div class="src"><b>Jira ECRs <span class="tag">real</span></b>AUTHORIZATION</div>
-          <div class="src mock" style="grid-column: span 2"><b>Factory PLM (FastAPI) <span class="tag m">mock</span></b>ACTUAL hardware: parts, revisions, BOMs</div>
-        </div>
-        <div class="down">&#8595;</div>
-        <div class="pipe">
-          <div class="p"><b>Sync</b>idempotent, logged</div><div class="a">&rarr;</div>
-          <div class="p"><b>Database</b>194 CIs, 12 variants</div><div class="a">&rarr;</div>
-          <div class="p"><b>Engine</b>baselines, rules, reports</div><div class="a">&rarr;</div>
-          <div class="p"><b>Dashboard</b>8 pages, audit PDF</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3><span class="n">5</span>Features &rarr; EIA-649</h3>
-        <table class="eia">
-          <tr><td>Identification</td><td>CI register, variants, baselines<span class="pg">CI Register &middot; Baselines</span></td></tr>
-          <tr><td>Change control</td><td>ECR workflow, approved-only baselines<span class="pg">Change Requests</span></td></tr>
-          <tr><td>Status accounting</td><td>KPIs, variant matrix, comparisons<span class="pg">Overview &middot; Variant Matrix</span></td></tr>
-          <tr><td>Verification &amp; audit</td><td>6 rules, compatibility, sealed baselines<span class="pg">Drift &middot; Compatibility &middot; Audit</span></td></tr>
-        </table>
-      </div>
-
-      <div class="card grow">
-        <h3><span class="n">6</span>Six Drift Rules</h3>
-        <div class="rules">
-          <div class="rule c"><b>Unauthorized change</b>no approved ECR</div>
-          <div class="rule w"><b>Unimplemented change</b>approved, not done in 7 days</div>
-          <div class="rule c"><b>Compatibility violation</b>parts that do not fit</div>
-          <div class="rule w"><b>Variant inconsistency</b>a model left behind</div>
-          <div class="rule c"><b>Baseline integrity</b>sealed record tampered</div>
-          <div class="rule w"><b>Stale security patch</b>older than 60 days</div>
-        </div>
-        <div class="sev"><span><i style="background:var(--red)"></i>Critical</span><span><i style="background:var(--amber)"></i>Warning</span></div>
-              </div>
-    </section>
-
-    <!-- Column 3: results -->
-    <section class="col">
-      <div class="card grow spread">
-        <h3><span class="n">7</span>Results: Live Demo</h3>
-
-        <div class="shot">
-          <div class="cap"><span class="k g">Before</span><span>Baseline MB-2026-09: <b>0 findings, <span class="badge g">100%</span> compliance</b></span></div>
-          <img src="assets/clean_overview.png" alt="Overview page with no open findings and 100 percent compliance">
-        </div>
-
-        <div class="shot">
-          <div class="cap"><span class="k r">After</span><span>Unapproved radio firmware, Japan model left behind, new display revision: <b><span class="badge r">3 Critical</span> <span class="badge a">1 Warning</span></b>, each pinpointed to item and variant</span></div>
-          <img src="assets/drift_overview.png" alt="Overview and open findings after drift: 3 critical, 1 warning, 97.8 percent compliance">
-        </div>
-
-        <div class="shot">
-          <div class="cap"><span class="k t">Matrix</span><span>Variant matrix: <b>red = differs</b> from the approved baseline, per variant</span></div>
-          <img src="assets/variant_matrix.png" alt="Variant matrix showing deployed versions per variant, differences in red">
-        </div>
-
-        <div class="shot">
-          <div class="cap"><span class="k r">Blocked</span><span>First Android 16 build <b>blocked</b> on the last Android 15 baseline, using Google&rsquo;s real bootloader and radio requirements</span></div>
-          <img src="assets/compatibility_fail.png" alt="Compatibility checker failing an Android 16 build against an Android 15 baseline">
-        </div>
-
-        <ul class="b" style="margin-top:18px">
-          <li>Approving it in Jira <b>clears the alarm automatically</b></li>
-          <li>History rebuilt 2022&ndash;2026 via <b>35 ECRs</b></li>
-          <li>Live rehearsal: <b>3/3 runs passed</b></li>
-        </ul>
+        <h3>Built With</h3>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Streamlit</span><span class="chip">FastAPI</span><span class="chip">SQLAlchemy</span><span class="chip">Plotly</span><span class="chip">GitHub API</span><span class="chip">Jira API</span></div>
       </div>
     </section>
-  </main>
-
-  <!-- ===== BOTTOM: project plan + deliverables + conclusion ===== -->
-  <section class="bottom">
-    <div class="card">
-      <h3><span class="n">8</span>Project Plan</h3>
-      <div class="timeline">
-        <div class="ph"><div class="dot">1</div><b>Research</b><span>EIA-649, public sources</span><span class="done">&#10003; Done</span></div>
-        <div class="ph"><div class="dot">2</div><b>Data &amp; Sync</b><span>schema, 4 connectors</span><span class="done">&#10003; Done</span></div>
-        <div class="ph"><div class="dot">3</div><b>Engine</b><span>baselines, 6 rules, compatibility</span><span class="done">&#10003; Done</span></div>
-        <div class="ph"><div class="dot">4</div><b>Dashboard</b><span>8 pages, audit PDF, auto-sync</span><span class="done">&#10003; Done</span></div>
-        <div class="ph"><div class="dot">5</div><b>Testing</b><span>104 tests, live rehearsal 3/3</span><span class="done">&#10003; Done</span></div>
-      </div>
-      <div class="note" style="margin-top:30px;text-align:center">All five phases complete: system <b>ready for live demonstration</b> at the final evaluation.</div>
-    </div>
-
-    <div class="card">
-      <h3><span class="n">9</span>Deliverables</h3>
-      <ul class="chk">
-        <li>CCD web dashboard (8 pages)</li>
-        <li>GitHub, Jira, history and PLM sync</li>
-        <li>Drift engine + compatibility check</li>
-        <li>Audit report (CSV and PDF)</li>
-        <li>Test suite and FYP report</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3><span class="n">10</span>Conclusion</h3>
-      <div class="concl">The CCD answers in <b>seconds</b> what takes <b>days</b>: what is in every variant, was every change approved, and where did reality drift?</div>
-      <div class="chips">
-        <span class="chip">Python 3.12</span><span class="chip">SQLAlchemy</span><span class="chip">FastAPI</span><span class="chip">Streamlit</span>
-        <span class="chip">Plotly</span><span class="chip">GitHub API</span><span class="chip">Jira API</span><span class="chip">ReportLab</span><span class="chip">pytest</span>
-      </div>
-      <div class="fw"><b>Future work:</b> real PLM connector, in-app approvals, multi-device support, webhooks.</div>
-    </div>
-  </section>
+  </div>
 
   <footer class="footer">
-    <div><b>Public-data case study.</b> Software and firmware versions, build history, security bulletins and hardware facts are real public Google/AOSP/FCC/iFixit data. Part numbers, revisions, BOMs and approvals are mocked, as no phone maker publishes them. Not Google&rsquo;s internal data.</div>
-    <div class="r">Waleed Ahmad &middot; FA23-BBD-151 &middot; 2026</div>
+    <div><b>Public-data case study:</b> real Google/AOSP data; part numbers and approvals are mocked.</div>
+    <div><b>Waleed Ahmad &middot; FA23-BBD-151 &middot; 2026</b></div>
   </footer>
 </div>
 </body>
