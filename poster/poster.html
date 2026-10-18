@@ -22,32 +22,30 @@
     background: radial-gradient(1100px 800px at 0% 38%, rgba(20,184,166,.13), transparent 70%),
                 radial-gradient(1000px 800px at 100% 72%, rgba(15,118,110,.10), transparent 70%), var(--mint); }
 
-  /* ---------- header: title (left) + goals (right) ---------- */
-  .header { position: relative; overflow: hidden; color: #fff; padding: 60px 100px 64px; display: grid; grid-template-columns: 1fr 720px; gap: 80px; align-items: center;
+  /* ---------- header: title + project goals ---------- */
+  .header { position: relative; overflow: hidden; color: #fff; padding: 54px 100px 50px;
     background: radial-gradient(1300px 800px at 88% -10%, rgba(45,212,191,.40), transparent 62%),
                 linear-gradient(135deg, var(--t950) 0%, var(--t800) 62%, var(--t700) 100%); }
   .header::before { content: ""; position: absolute; right: -300px; top: -380px; width: 1200px; height: 1200px; border-radius: 50%;
     border: 2px solid rgba(255,255,255,.10); box-shadow: 0 0 0 110px rgba(255,255,255,.03), 0 0 0 220px rgba(255,255,255,.02); pointer-events: none; }
   .header > .art { position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 0; }
-  .header > .tb, .header > .goals { position: relative; z-index: 1; }
+  .header > .tb { position: relative; z-index: 1; }
   .chip { display: inline-flex; align-items: center; gap: 16px; font-size: 28px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase;
     color: var(--t200); border: 2px solid rgba(167,243,230,.45); border-radius: 40px; padding: 8px 28px 8px 22px; }
   .chip i { width: 14px; height: 14px; border-radius: 50%; background: var(--t300); display: inline-block; }
-  h1 { font-size: 130px; line-height: .98; letter-spacing: -4.5px; font-weight: 800; margin: 30px 0 26px; }
+  h1 { font-size: 168px; line-height: .98; letter-spacing: -5.6px; font-weight: 800; margin: 26px 0 20px; }
   h1 span { color: #86efdc; }
-  .sub { font-size: 56px; font-weight: 500; color: rgba(255,255,255,.9); letter-spacing: -.5px; }
-  .prods { display: inline-flex; gap: 22px; margin-top: 32px; position: relative; }
-  .prods::before { content: ""; position: absolute; left: 40px; right: 40px; top: 50%; height: 2px; background: linear-gradient(90deg, rgba(167,243,230,.0), rgba(167,243,230,.55) 20%, rgba(167,243,230,.55) 80%, rgba(167,243,230,0)); }
-  .prods span { position: relative; width: 88px; height: 88px; border-radius: 50%; border: 2px solid rgba(167,243,230,.6); background: radial-gradient(circle at 35% 30%, #23877d, #0b5a53);
-    display: flex; align-items: center; justify-content: center; color: #d9fff7; font-size: 46px; box-shadow: 0 0 0 8px rgba(94,234,212,.07), 0 14px 30px -10px rgba(0,0,0,.45); }
-
-  .goals { background: #fff; color: var(--ink); border-radius: 48px; padding: 46px 56px 34px; box-shadow: 0 40px 80px -24px rgba(0,20,18,.6); }
-  .goals h2 { margin: 0 0 18px; font-size: 56px; font-weight: 800; letter-spacing: -1px; color: var(--t800); }
-  .goals ul { margin: 0; padding: 0; list-style: none; }
-  .goals li { display: flex; align-items: center; gap: 30px; font-size: 47px; font-weight: 700; line-height: 1.1; letter-spacing: -.5px; padding: 19px 0; border-top: 2px solid #e1efec; }
-  .goals li:first-child { border-top: 0; }
-  .gi { width: 88px; height: 88px; border-radius: 26px; flex: none; color: #fff; font-size: 52px; display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, var(--t700), var(--t500)); box-shadow: 0 14px 24px -12px rgba(15,118,110,.7); }
+  .sub { font-size: 54px; font-weight: 500; color: rgba(255,255,255,.9); letter-spacing: -.5px; }
+  .gl { margin-top: 36px; }
+  .gl-h { display: flex; align-items: center; gap: 24px; font-size: 28px; font-weight: 700; letter-spacing: 7px; text-transform: uppercase; color: var(--t200); margin-bottom: 18px; }
+  .gl-h::after { content: ""; flex: 1; height: 2px; background: linear-gradient(90deg, rgba(167,243,230,.55), rgba(167,243,230,0)); }
+  .goals4 { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+  .goals4 li { display: flex; align-items: center; gap: 22px; padding: 18px 24px; border-radius: 34px; border: 2px solid rgba(167,243,230,.55);
+    background: linear-gradient(135deg, #0e6f67, #08463f); box-shadow: inset 0 2px 0 rgba(255,255,255,.14), 0 22px 40px -22px rgba(0,0,0,.7); }
+  .gi { width: 78px; height: 78px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; font-size: 42px; color: var(--t950);
+    background: linear-gradient(135deg, #9af5e5, #2dd4bf); box-shadow: 0 0 0 7px rgba(94,234,212,.14); }
+  .goals4 b { display: block; font-size: 50px; font-weight: 800; letter-spacing: -1px; line-height: 1.05; }
+  .goals4 small { display: block; font-size: 29px; font-weight: 500; color: var(--t200); margin-top: 4px; }
 
   /* ---------- workflow ---------- */
   .flow { flex: 1; min-height: 0; padding: 46px 100px 0; display: flex; flex-direction: column; }
@@ -63,35 +61,36 @@
   .box h3 { margin: 0 0 30px; font-size: 58px; font-weight: 800; letter-spacing: -1.5px; color: var(--t900); display: flex; align-items: center; gap: 18px; }
   .box h3::before { content: ""; width: 14px; height: 54px; border-radius: 7px; background: linear-gradient(var(--t500), var(--t700)); }
   .tl { display: grid; grid-template-columns: repeat(5, 1fr); position: relative; }
-  .tl::before { content: ""; position: absolute; left: 10%; right: 10%; top: 41px; height: 6px; border-radius: 3px; background: var(--t300); }
+  .tl::before { content: ""; position: absolute; left: 10%; right: 1.5%; top: 78px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--t600), var(--t300)); }
+  .tl::after { content: ""; position: absolute; right: 0; top: 67px; border-left: 22px solid var(--t300); border-top: 14px solid transparent; border-bottom: 14px solid transparent; }
   .ph { position: relative; text-align: center; }
-  .ph .d { width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 16px; color: #fff; font-size: 46px; display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, var(--t800), var(--t600)); border: 7px solid #fff; box-shadow: 0 0 0 3px var(--t600); }
+  .ph small { display: block; font-size: 24px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--t600); margin-bottom: 10px; }
+  .ph .d { width: 84px; height: 84px; border-radius: 50%; margin: 0 auto 14px; color: #fff; font-size: 40px; font-weight: 800; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--t800), var(--t600)); border: 7px solid #fff; box-shadow: 0 0 0 3px var(--t600); position: relative; z-index: 1; }
   .ph b { font-size: 34px; font-weight: 700; letter-spacing: -.3px; }
   .dl { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 26px 20px; }
   .dl li { display: flex; align-items: center; gap: 18px; font-size: 36px; font-weight: 700; letter-spacing: -.3px; }
   .dl .k { width: 62px; height: 62px; border-radius: 18px; flex: none; background: var(--green); color: #fff; font-size: 38px; display: flex; align-items: center; justify-content: center; }
 
-  /* ---------- footer: department | CUI logo | student + supervisor ---------- */
-  .footer { margin-top: 44px; position: relative; color: #fff; display: grid; grid-template-columns: 1fr 292px 1fr; align-items: center; gap: 0; padding: 44px 100px 48px;
+  /* ---------- footer: students | CUI logo | supervisors ---------- */
+  .footer { margin-top: 40px; position: relative; color: #fff; display: grid; grid-template-columns: 1fr 292px 1fr; align-items: center; padding: 44px 100px 48px;
     background: radial-gradient(1200px 500px at 50% 120%, rgba(45,212,191,.35), transparent 65%), linear-gradient(135deg, var(--t950), var(--t800) 70%, var(--t700)); }
   .footer::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: linear-gradient(90deg, var(--t500), var(--t300), var(--t500)); }
-  .dept { text-align: right; padding-right: 76px; }
-  .dept small { display: block; font-size: 40px; font-weight: 600; color: var(--t200); letter-spacing: -.3px; }
-  .dept b { display: block; font-size: 68px; font-weight: 800; line-height: 1.04; letter-spacing: -2px; margin: 4px 0 14px; }
-  .dept span { display: block; font-size: 32px; font-weight: 500; color: rgba(255,255,255,.75); }
+  .side { display: flex; flex-direction: column; align-items: center; gap: 26px; padding: 0 40px; }
+  .hd { text-align: center; }
+  .hd small { display: block; font-size: 34px; font-weight: 600; color: var(--t200); letter-spacing: -.3px; }
+  .hd b { display: block; font-size: 58px; font-weight: 800; line-height: 1.04; letter-spacing: -1.5px; margin-top: 4px; }
+  .row { display: flex; gap: 28px; justify-content: center; }
+  .pc { width: 340px; display: flex; flex-direction: column; align-items: center; text-align: center; }
   .logo { width: 292px; height: 292px; border-radius: 50%; background: #fff; padding: 12px; position: relative;
     box-shadow: 0 0 0 12px rgba(255,255,255,.16), 0 30px 60px -10px rgba(0,0,0,.5); }
   .logo img { width: 100%; height: 100%; border-radius: 50%; display: block; }
-  .people { padding-left: 76px; }
-  .grp { display: grid; gap: 22px; }
-  .grp + .grp { margin-top: 24px; padding-top: 24px; border-top: 2px solid rgba(255,255,255,.2); }
-  .p { display: flex; align-items: center; gap: 24px; }
-  .photo { position: relative; width: 86px; height: 86px; border-radius: 50%; flex: none; overflow: hidden; border: 5px solid #fff; background: var(--t700); color: rgba(255,255,255,.75);
-    display: flex; align-items: center; justify-content: center; font-size: 50px; box-shadow: 0 12px 24px -10px rgba(0,0,0,.5); }
-  .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .p b { display: block; font-size: 44px; font-weight: 800; letter-spacing: -1px; line-height: 1.08; }
-  .p span { display: block; font-size: 29px; font-weight: 500; color: var(--t200); margin-top: 3px; }
+  .photo { position: relative; width: 190px; height: 190px; border-radius: 50%; overflow: hidden; border: 7px solid #fff; color: rgba(255,255,255,.72);
+    background: radial-gradient(circle at 35% 30%, #23877d, #0b5a53); display: flex; align-items: center; justify-content: center; font-size: 104px;
+    box-shadow: 0 20px 34px -14px rgba(0,0,0,.55); }
+  .photo img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pc b { font-size: 34px; font-weight: 800; letter-spacing: -.5px; margin-top: 18px; line-height: 1.1; }
+  .pc span { font-size: 28px; font-weight: 500; color: var(--t200); margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -104,11 +103,6 @@
     <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 2.8h8.2L19 7.6V21H6z"/><path d="M14 2.8v5h5M9.5 13h6M9.5 16.8h6"/></symbol>
     <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.2"/><path d="M3.8 21c0-4.5 3.7-8 8.2-8s8.2 3.5 8.2 8"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.8l5 5L19.5 7"/></symbol>
-    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.6"/><path d="M10.5 18.4h3"/></symbol>
-    <symbol id="i-car" viewBox="0 0 24 24"><path d="M3 17.5v-4.2l2-4.6A2 2 0 0 1 6.8 7.5h10.4A2 2 0 0 1 19 8.7l2 4.6v4.2z"/><path d="M3 13.3h18"/><circle cx="7.6" cy="17.6" r="1.9"/><circle cx="16.4" cy="17.6" r="1.9"/></symbol>
-    <symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 2.5c1 0 1.8 1.2 1.8 3v4.4l7.7 4.8v2.3L13.8 14v4.6l2.4 1.9V22L12 20.8 7.8 22v-1.5l2.4-1.9V14l-7.7 3.1v-2.3l7.7-4.9V5.5c0-1.8.8-3 1.8-3z"/></symbol>
-    <symbol id="i-heart" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="3.2"/><path d="M5.5 12.5h3l1.6-3.5 3 6.5 1.6-3h3.8"/></symbol>
-    <symbol id="i-factory" viewBox="0 0 24 24"><path d="M3 21V11l6 3.6V11l6 3.6V5.5h6V21z"/><path d="M7 18h2M12 18h2M17 18h1"/></symbol>
   </defs>
 </svg>
 
@@ -119,26 +113,18 @@
     <!--ART:begin--><svg class="art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2160 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="aGlow"><stop offset="0" stop-color="#5eead4" stop-opacity=".55"/><stop offset="1" stop-color="#5eead4" stop-opacity="0"/></radialGradient></defs><line x1="1352.8" y1="607.9" x2="1177.1" y2="463.6" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1352.8" y1="607.9" x2="1134.8" y2="637" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1352.8" y1="607.9" x2="1326" y2="759.6" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1352.8" y1="607.9" x2="1412.3" y2="469.4" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1735.3" y1="780.5" x2="1503.2" y2="801.2" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1735.3" y1="780.5" x2="1690.3" y2="567.4" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1735.3" y1="780.5" x2="1608" y2="682.2" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="34.4" y1="370.4" x2="-0.9" y2="156.4" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="34.4" y1="370.4" x2="-22.5" y2="553" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="34.4" y1="370.4" x2="172.4" y2="263" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="2064.3" y1="528.1" x2="2151" y2="720.3" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="2064.3" y1="528.1" x2="2136.7" y2="360" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="2064.3" y1="528.1" x2="1901.2" y2="562" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1970" y1="67.4" x2="1669.9" y2="107.3" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1970" y1="67.4" x2="1954.1" y2="227" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1970" y1="67.4" x2="2134.7" y2="-10.3" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1011.3" y1="182.1" x2="771.8" y2="112.7" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1011.3" y1="182.1" x2="1180.2" y2="238.7" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1011.3" y1="182.1" x2="981.6" y2="332.7" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1177.1" y1="463.6" x2="1134.8" y2="637" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1177.1" y1="463.6" x2="1180.2" y2="238.7" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1177.1" y1="463.6" x2="981.6" y2="332.7" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1177.1" y1="463.6" x2="1412.3" y2="469.4" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="-0.9" y1="156.4" x2="-9.8" y2="10.2" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="-0.9" y1="156.4" x2="172.4" y2="263" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="-0.9" y1="156.4" x2="143.6" y2="98" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="590.5" y1="758.1" x2="424.6" y2="779.2" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="590.5" y1="758.1" x2="406.3" y2="619.9" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="590.5" y1="758.1" x2="806.9" y2="820" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="590.5" y1="758.1" x2="772.1" y2="646" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1669.9" y1="107.3" x2="1787.1" y2="383.4" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1669.9" y1="107.3" x2="1534.4" y2="19" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1340.7" y1="79" x2="1534.4" y2="19" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1340.7" y1="79" x2="1180.2" y2="238.7" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1340.7" y1="79" x2="1447.5" y2="331.9" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="-26.1" y1="719.4" x2="-22.5" y2="553" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="-26.1" y1="719.4" x2="209.9" y2="613.6" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="435" y1="155.3" x2="293.5" y2="26" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="435" y1="155.3" x2="172.4" y2="263" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="435" y1="155.3" x2="143.6" y2="98" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="2151" y1="720.3" x2="1901.2" y2="562" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="424.6" y1="779.2" x2="406.3" y2="619.9" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="424.6" y1="779.2" x2="209.9" y2="613.6" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1503.2" y1="801.2" x2="1326" y2="759.6" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1503.2" y1="801.2" x2="1608" y2="682.2" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1954.1" y1="227" x2="1787.1" y2="383.4" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1954.1" y1="227" x2="2134.7" y2="-10.3" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1954.1" y1="227" x2="2136.7" y2="360" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="771.8" y1="112.7" x2="734.5" y2="275.1" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="771.8" y1="112.7" x2="981.6" y2="332.7" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="293.5" y1="26" x2="-9.8" y2="10.2" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="293.5" y1="26" x2="172.4" y2="263" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="293.5" y1="26" x2="143.6" y2="98" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="639" y1="488.7" x2="782.9" y2="467.5" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="639" y1="488.7" x2="734.5" y2="275.1" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="639" y1="488.7" x2="772.1" y2="646" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="-22.5" y1="553" x2="209.9" y2="613.6" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1787.1" y1="383.4" x2="1690.3" y2="567.4" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1787.1" y1="383.4" x2="1901.2" y2="562" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="782.9" y1="467.5" x2="734.5" y2="275.1" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="782.9" y1="467.5" x2="772.1" y2="646" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="-9.8" y1="10.2" x2="143.6" y2="98" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="406.3" y1="619.9" x2="209.9" y2="613.6" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1134.8" y1="637" x2="1326" y2="759.6" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1134.8" y1="637" x2="997.7" y2="672.3" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="172.4" y1="263" x2="143.6" y2="98" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1180.2" y1="238.7" x2="981.6" y2="332.7" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1180.2" y1="238.7" x2="1447.5" y2="331.9" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="2136.7" y1="360" x2="1901.2" y2="562" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="806.9" y1="820" x2="772.1" y2="646" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="806.9" y1="820" x2="997.7" y2="672.3" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="772.1" y1="646" x2="997.7" y2="672.3" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1690.3" y1="567.4" x2="1608" y2="682.2" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1690.3" y1="567.4" x2="1901.2" y2="562" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><line x1="1412.3" y1="469.4" x2="1447.5" y2="331.9" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/><circle cx="1352.8" cy="607.9" r="3.5" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1735.3" cy="780.5" r="34" fill="url(#aGlow)"/><circle cx="1735.3" cy="780.5" r="14" fill="none" stroke="#5eead4" stroke-opacity=".55" stroke-width="2"/><circle cx="1735.3" cy="780.5" r="6.5" fill="#5eead4"/><circle cx="34.4" cy="370.4" r="4.7" fill="#a7f3e6" fill-opacity=".38"/><circle cx="2064.3" cy="528.1" r="4.6" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1970" cy="67.4" r="3.1" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1011.3" cy="182.1" r="4.2" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1177.1" cy="463.6" r="3.6" fill="#a7f3e6" fill-opacity=".38"/><circle cx="-0.9" cy="156.4" r="3.1" fill="#a7f3e6" fill-opacity=".38"/><circle cx="590.5" cy="758.1" r="3.3" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1669.9" cy="107.3" r="3.8" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1340.7" cy="79" r="34" fill="url(#aGlow)"/><circle cx="1340.7" cy="79" r="14" fill="none" stroke="#5eead4" stroke-opacity=".55" stroke-width="2"/><circle cx="1340.7" cy="79" r="6.5" fill="#5eead4"/><circle cx="-26.1" cy="719.4" r="34" fill="url(#aGlow)"/><circle cx="-26.1" cy="719.4" r="14" fill="none" stroke="#5eead4" stroke-opacity=".55" stroke-width="2"/><circle cx="-26.1" cy="719.4" r="6.5" fill="#5eead4"/><circle cx="435" cy="155.3" r="34" fill="url(#aGlow)"/><circle cx="435" cy="155.3" r="14" fill="none" stroke="#5eead4" stroke-opacity=".55" stroke-width="2"/><circle cx="435" cy="155.3" r="6.5" fill="#5eead4"/><circle cx="2151" cy="720.3" r="3.5" fill="#a7f3e6" fill-opacity=".38"/><circle cx="424.6" cy="779.2" r="3.5" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1503.2" cy="801.2" r="3.1" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1954.1" cy="227" r="4.2" fill="#a7f3e6" fill-opacity=".38"/><circle cx="771.8" cy="112.7" r="34" fill="url(#aGlow)"/><circle cx="771.8" cy="112.7" r="14" fill="none" stroke="#5eead4" stroke-opacity=".55" stroke-width="2"/><circle cx="771.8" cy="112.7" r="6.5" fill="#5eead4"/><circle cx="293.5" cy="26" r="4" fill="#a7f3e6" fill-opacity=".38"/><circle cx="639" cy="488.7" r="4.5" fill="#a7f3e6" fill-opacity=".38"/><circle cx="-22.5" cy="553" r="4.5" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1787.1" cy="383.4" r="3.6" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1534.4" cy="19" r="5.3" fill="#a7f3e6" fill-opacity=".38"/><circle cx="2134.7" cy="-10.3" r="3" fill="#a7f3e6" fill-opacity=".38"/><circle cx="782.9" cy="467.5" r="4" fill="#a7f3e6" fill-opacity=".38"/><circle cx="-9.8" cy="10.2" r="3.7" fill="#a7f3e6" fill-opacity=".38"/><circle cx="406.3" cy="619.9" r="4" fill="#a7f3e6" fill-opacity=".38"/><circle cx="734.5" cy="275.1" r="3.3" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1134.8" cy="637" r="34" fill="url(#aGlow)"/><circle cx="1134.8" cy="637" r="14" fill="none" stroke="#5eead4" stroke-opacity=".55" stroke-width="2"/><circle cx="1134.8" cy="637" r="6.5" fill="#5eead4"/><circle cx="209.9" cy="613.6" r="5.1" fill="#a7f3e6" fill-opacity=".38"/><circle cx="172.4" cy="263" r="3.9" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1326" cy="759.6" r="3.1" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1180.2" cy="238.7" r="4.5" fill="#a7f3e6" fill-opacity=".38"/><circle cx="143.6" cy="98" r="3.2" fill="#a7f3e6" fill-opacity=".38"/><circle cx="981.6" cy="332.7" r="4.4" fill="#a7f3e6" fill-opacity=".38"/><circle cx="2136.7" cy="360" r="34" fill="url(#aGlow)"/><circle cx="2136.7" cy="360" r="14" fill="none" stroke="#5eead4" stroke-opacity=".55" stroke-width="2"/><circle cx="2136.7" cy="360" r="6.5" fill="#5eead4"/><circle cx="806.9" cy="820" r="3.8" fill="#a7f3e6" fill-opacity=".38"/><circle cx="772.1" cy="646" r="4.5" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1690.3" cy="567.4" r="5.4" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1412.3" cy="469.4" r="34" fill="url(#aGlow)"/><circle cx="1412.3" cy="469.4" r="14" fill="none" stroke="#5eead4" stroke-opacity=".55" stroke-width="2"/><circle cx="1412.3" cy="469.4" r="6.5" fill="#5eead4"/><circle cx="997.7" cy="672.3" r="34" fill="url(#aGlow)"/><circle cx="997.7" cy="672.3" r="14" fill="none" stroke="#5eead4" stroke-opacity=".55" stroke-width="2"/><circle cx="997.7" cy="672.3" r="6.5" fill="#5eead4"/><circle cx="1608" cy="682.2" r="5" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1901.2" cy="562" r="4" fill="#a7f3e6" fill-opacity=".38"/><circle cx="1447.5" cy="331.9" r="5" fill="#a7f3e6" fill-opacity=".38"/></svg><!--ART:end-->
     <div class="tb">
       <div class="chip"><i></i>Final Year Project</div>
-      <h1>Configuration<br>Control<br><span>Dashboard</span></h1>
+      <h1>Configuration Control<br><span>Dashboard</span></h1>
       <div class="sub">for any configurable product</div>
-      <div class="prods">
-        <span><svg class="ico"><use href="#i-phone"/></svg></span>
-        <span><svg class="ico"><use href="#i-car"/></svg></span>
-        <span><svg class="ico"><use href="#i-plane"/></svg></span>
-        <span><svg class="ico"><use href="#i-heart"/></svg></span>
-        <span><svg class="ico"><use href="#i-factory"/></svg></span>
+      <div class="gl">
+        <div class="gl-h">Project Goals</div>
+        <ul class="goals4">
+          <li><span class="gi"><svg class="ico"><use href="#i-layers"/></svg></span><div><b>Track</b><small>every item</small></div></li>
+          <li><span class="gi"><svg class="ico"><use href="#i-shield"/></svg></span><div><b>Control</b><small>every change</small></div></li>
+          <li><span class="gi"><svg class="ico"><use href="#i-alert"/></svg></span><div><b>Detect</b><small>drift automatically</small></div></li>
+          <li><span class="gi"><svg class="ico"><use href="#i-file"/></svg></span><div><b>Audit</b><small>in seconds</small></div></li>
+        </ul>
       </div>
     </div>
-
-    <aside class="goals">
-      <h2>Project Goals</h2>
-      <ul>
-        <li><span class="gi"><svg class="ico"><use href="#i-layers"/></svg></span>Track every item</li>
-        <li><span class="gi"><svg class="ico"><use href="#i-shield"/></svg></span>Control every change</li>
-        <li><span class="gi"><svg class="ico"><use href="#i-alert"/></svg></span>Auto-detect drift</li>
-        <li><span class="gi"><svg class="ico"><use href="#i-file"/></svg></span>Audit in seconds</li>
-      </ul>
-    </aside>
   </header>
 
   <!-- ============ MIDDLE: how it works (illustrated workflow map) ============ -->
@@ -170,11 +156,11 @@
     <div class="box">
       <h3>Project Plan</h3>
       <div class="tl">
-        <div class="ph"><div class="d"><svg class="ico"><use href="#i-check"/></svg></div><b>Research</b></div>
-        <div class="ph"><div class="d"><svg class="ico"><use href="#i-check"/></svg></div><b>Data sync</b></div>
-        <div class="ph"><div class="d"><svg class="ico"><use href="#i-check"/></svg></div><b>Engine</b></div>
-        <div class="ph"><div class="d"><svg class="ico"><use href="#i-check"/></svg></div><b>Dashboard</b></div>
-        <div class="ph"><div class="d"><svg class="ico"><use href="#i-check"/></svg></div><b>Testing</b></div>
+        <div class="ph"><small>Phase 1</small><div class="d">1</div><b>Research</b></div>
+        <div class="ph"><small>Phase 2</small><div class="d">2</div><b>Data sync</b></div>
+        <div class="ph"><small>Phase 3</small><div class="d">3</div><b>Engine</b></div>
+        <div class="ph"><small>Phase 4</small><div class="d">4</div><b>Dashboard</b></div>
+        <div class="ph"><small>Phase 5</small><div class="d">5</div><b>Testing</b></div>
       </div>
     </div>
     <div class="box">
@@ -190,33 +176,32 @@
 
   <!-- ============ FOOTER: department | CUI logo (centre) | student + supervisor ============ -->
   <footer class="footer">
-    <div class="dept">
-      <small>Department of</small>
-      <b>Management Sciences</b>
-      <span>BS (Business Data Analytics)</span>
+    <div class="side">
+      <div class="hd"><small>Department of</small><b>Management Sciences</b></div>
+      <div class="row">
+        <div class="pc">
+          <div class="photo"><svg class="ico"><use href="#i-user"/></svg><img src="assets/waleed.jpg" alt="" onerror="this.remove()"></div>
+          <b>Waleed Ahmad</b><span>FA23-BBD-151</span>
+        </div>
+        <div class="pc">
+          <div class="photo"><svg class="ico"><use href="#i-user"/></svg><img src="assets/kumail.jpg" alt="" onerror="this.remove()"></div>
+          <b>Syed Kumail Abbas</b><span>FA23-BBD-135</span>
+        </div>
+      </div>
     </div>
 
     <div class="logo"><img src="assets/cui_logo.png" alt="COMSATS University Islamabad logo"></div>
 
-    <div class="people">
-      <div class="grp">
-        <div class="p">
-          <div class="photo"><svg class="ico"><use href="#i-user"/></svg><img src="assets/waleed.jpg" alt="" onerror="this.remove()"></div>
-          <div><b>Waleed Ahmad</b><span>Student &middot; FA23-BBD-151</span></div>
-        </div>
-        <div class="p">
-          <div class="photo"><svg class="ico"><use href="#i-user"/></svg><img src="assets/kumail.jpg" alt="" onerror="this.remove()"></div>
-          <div><b>Syed Kumail Abbas</b><span>Student &middot; FA23-BBD-135</span></div>
-        </div>
-      </div>
-      <div class="grp">
-        <div class="p">
+    <div class="side">
+      <div class="hd"><small>Under the guidance of</small><b>Supervisors</b></div>
+      <div class="row">
+        <div class="pc">
           <div class="photo"><svg class="ico"><use href="#i-user"/></svg><img src="assets/asmara.jpg" alt="" onerror="this.remove()"></div>
-          <div><b>Syeda Asmara Nisar</b><span>Supervisor</span></div>
+          <b>Syeda Asmara Nisar</b><span>Supervisor</span>
         </div>
-        <div class="p">
+        <div class="pc">
           <div class="photo"><svg class="ico"><use href="#i-user"/></svg><img src="assets/salman.jpg" alt="" onerror="this.remove()"></div>
-          <div><b>Salman Khan</b><span>External Supervisor</span></div>
+          <b>Salman Khan</b><span>External Supervisor</span>
         </div>
       </div>
     </div>
