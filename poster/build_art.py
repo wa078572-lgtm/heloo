@@ -9,7 +9,9 @@ from PIL import ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 HTML = os.path.join(HERE, "poster.html")
+HTML_LOOP = os.path.join(HERE, "poster_loop.html")
 OUT_SVG = os.path.join(HERE, "workflow.svg")
+OUT_SVG_LOOP = os.path.join(HERE, "workflow_loop.svg")
 FONT_FILE = "/usr/share/fonts/opentype/inter/Inter-%s.otf"
 FONT_FAMILY = "Inter, 'Segoe UI', Arial, sans-serif"
 
@@ -56,6 +58,9 @@ SYMBOLS = {
     "lock": '<rect x="5" y="10.5" width="14" height="10" rx="2.3"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/><path d="M12 14.6v2.3"/>',
     "check": '<path d="M4.5 12.8l5 5L19.5 7"/>',
     "plus": '<path d="M12 5v14M5 12h14"/>',
+    "db": '<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v13c0 1.55 3.35 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-13M4.5 12c0 1.55 3.35 2.8 7.5 2.8s7.5-1.25 7.5-2.8"/>',
+    "search": '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/><path d="M8 10.6l1.8 1.8 3.2-3.6"/>',
+    "file": '<path d="M6 2.8h8.2L19 7.6V21H6z"/><path d="M14 2.8v5h5M9.5 13h6M9.5 16.8h6"/>',
 }
 
 _fonts = {}
@@ -481,6 +486,142 @@ def build_map():
     return defs() + "".join(out)
 
 
+RC = (980, 722)
+RR, NR = 490, 88
+AMBER_D = "#e8920a"
+STAGES = [
+    ("Collect", "Sync every source", "db", T600, T800),
+    ("Compare", "Three-way check", "search", T800, T900),
+    ("Alert", "Flag drift instantly", "alert", RED, RED_D),
+    ("Control", "Change by approval", "stamp", AMBER_D, "#9a5a00"),
+    ("Report", "Audit-ready anytime", "file", GREEN, "#0b6e33"),
+]
+ARC_COLORS = [T400, RED, AMBER_D, GREEN_L, T300]
+
+
+def r_ang(k):
+    return math.radians(-90 + 72 * k)
+
+
+def r_pt(a, r=RR):
+    return RC[0] + r * math.cos(a), RC[1] + r * math.sin(a)
+
+
+def ring_arcs():
+    gap = 2 * math.asin((NR + 24) / (2 * RR))
+    outlines, colored, chev, toks = [], [], [], []
+    for k in range(5):
+        a0, a1 = r_ang(k) + gap, r_ang(k + 1) - gap
+        (x0, y0), (x1, y1) = r_pt(a0), r_pt(a1)
+        d = f"M{n(x0)},{n(y0)} A{RR},{RR} 0 0 1 {n(x1)},{n(y1)}"
+        dash = ""
+        outlines.append(f'<path d="{d}" fill="none" stroke="#fff" stroke-opacity=".95" stroke-width="30" stroke-linecap="round"/>')
+        colored.append(f'<path d="{d}" fill="none" stroke="{ARC_COLORS[k]}" stroke-width="16" stroke-linecap="round"{dash}/>')
+        a = a0 + 0.5 * 58 / RR
+        while a < a1 - 0.5 * 58 / RR:
+            x, y = r_pt(a)
+            chev.append(f'<path d="M-6,-8.5L5,0L-6,8.5" transform="translate({n(x)} {n(y)}) rotate({n(math.degrees(a) + 90)})"/>')
+            a += 58 / RR
+        f = 0.5
+        am = a0 + (a1 - a0) * f
+        x, y = r_pt(am)
+        t = [f'<circle cx="{n(x)}" cy="{n(y)}" r="30" fill="{ARC_COLORS[k]}" opacity=".16"/>']
+        for j in range(3, 0, -1):
+            tx, ty = r_pt(am - j * 17 / RR)
+            t.append(f'<circle cx="{n(tx)}" cy="{n(ty)}" r="{n(12 - j * 2.2)}" fill="{ARC_COLORS[k]}" opacity="{n(0.62 - j * 0.15)}"/>')
+        t.append(f'<circle cx="{n(x)}" cy="{n(y)}" r="15" fill="{ARC_COLORS[k]}" stroke="#fff" stroke-width="4"/>')
+        t.append(f'<circle cx="{n(x - 4)}" cy="{n(y - 4)}" r="4" fill="#fff" opacity=".85"/>')
+        if k != 4:
+            toks.append("".join(t))
+    chev_g = f'<g fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" opacity=".95">{"".join(chev)}</g>'
+    return "".join(outlines) + "".join(colored) + chev_g + "".join(toks)
+
+
+def ring_nodes():
+    out = []
+    for k, (verb, cap, name, color, dark) in enumerate(STAGES):
+        x, y = r_pt(r_ang(k))
+        out.append(f'<circle cx="{n(x)}" cy="{n(y + 10)}" r="{NR}" fill="{T900}" opacity=".15"/>')
+        out.append(f'<circle cx="{n(x)}" cy="{n(y)}" r="{NR + 18}" fill="{color}" opacity=".15"/>')
+        out.append(f'<circle cx="{n(x)}" cy="{n(y)}" r="{NR}" fill="{color}" stroke="#fff" stroke-width="9"/>')
+        out.append(icon(name, x, y, 92, "#fff", 1.9))
+        bx, by = x - NR * 0.74, y - NR * 0.74
+        out.append(f'<circle cx="{n(bx)}" cy="{n(by)}" r="27" fill="#fff" stroke="{color}" stroke-width="6"/>')
+        out.append(text(bx, by + 10.5, str(k + 1), 31, 800, dark, "middle"))
+        if k == 0:
+            out.append(text(x, y - NR - 70, verb, 62, 800, T900, "middle", -1.5))
+            out.append(text(x, y - NR - 28, cap, 31, 500, INK2, "middle"))
+        elif k in (1, 2):
+            lx = x + NR + 36
+            out.append(text(lx, y + 4, verb, 62, 800, T900, "start", -1.5))
+            out.append(text(lx, y + 50, cap, 31, 500, INK2, "start"))
+        else:
+            lx = x - NR - 36
+            out.append(text(lx, y + 4, verb, 62, 800, T900, "end", -1.5))
+            out.append(text(lx, y + 50, cap, 31, 500, INK2, "end"))
+    return "".join(out)
+
+
+def stack_chip(cx, cy, l1, l2, c1=INK, c2=GREEN):
+    w = max(tw(l1, 31), tw(l2, 31)) + 52
+    h = 88
+    return (f'<rect x="{n(cx - w / 2 + 2)}" y="{n(cy - h / 2 + 6)}" width="{n(w)}" height="{h}" rx="28" fill="{T900}" opacity=".10"/>'
+            f'<rect x="{n(cx - w / 2)}" y="{n(cy - h / 2)}" width="{n(w)}" height="{h}" rx="28" fill="#fff" stroke="{LINE}" stroke-width="2.5"/>'
+            + text(cx, cy - 6, l1, 31, 700, c1, "middle") + text(cx, cy + 28, l2, 31, 700, c2, "middle"))
+
+
+def balanced_scale(cx=980, cy=650):
+    half, hang = 250, 134
+    base_y = cy + 206
+    o = [f'<circle cx="{cx}" cy="{cy + 50}" r="330" fill="url(#mGlowT)"/>']
+    o.append(f'<ellipse cx="{cx}" cy="{base_y + 38}" rx="210" ry="14" fill="{T900}" opacity=".12"/>')
+    o.append(f'<rect x="{cx - 16}" y="{cy}" width="32" height="{base_y - cy}" rx="9" fill="url(#mPost)"/>')
+    o.append(f'<rect x="{cx - 24}" y="{cy + 88}" width="48" height="13" rx="6.5" fill="{T900}"/>')
+    o.append(f'<rect x="{cx - 96}" y="{base_y - 16}" width="192" height="22" rx="11" fill="url(#mPost)"/>')
+    o.append(f'<rect x="{cx - 152}" y="{base_y}" width="304" height="28" rx="14" fill="url(#mPost)"/>')
+    o.append(f'<rect x="{cx - 132}" y="{base_y + 4}" width="264" height="4" rx="2" fill="#fff" opacity=".22"/>')
+    o.append(f'<g transform="translate({cx} {cy})">'
+             f'<path d="M-272,-9 L-72,-19 Q0,-25 72,-19 L272,-9 A9,9 0 0 1 272,9 L72,19 Q0,25 -72,19 L-272,9 A9,9 0 0 1 -272,-9 Z" fill="url(#mBeam)"/>'
+             f'<path d="M-258,-7 L-72,-16 Q0,-21 72,-16 L258,-7" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="3" stroke-linecap="round"/>'
+             + "".join(f'<circle cx="{sx}" cy="0" r="16" fill="{T900}" stroke="{T300}" stroke-width="3.5"/><circle cx="{sx}" cy="0" r="4.5" fill="{T300}"/>' for sx in (-half, half))
+             + "</g>")
+    o.append(f'<rect x="{cx - 6}" y="{cy - 46}" width="12" height="30" rx="6" fill="{T900}"/>')
+    o.append(f'<circle cx="{cx}" cy="{cy}" r="31" fill="{T900}" stroke="{T300}" stroke-width="4"/><circle cx="{cx}" cy="{cy}" r="11" fill="{T300}"/>')
+    o.append(f'<circle cx="{cx}" cy="{cy - 72}" r="34" fill="{GREEN_L}" opacity=".25"/>')
+    o.append(f'<circle cx="{cx}" cy="{cy - 72}" r="28" fill="url(#mGreenB)" stroke="#fff" stroke-width="5"/>')
+    o.append(icon("check", cx, cy - 72, 30, "#fff", 3))
+    for sx in (-half, half):
+        px = cx + sx
+        o.append(f'<g transform="translate({px} {cy})">'
+                 f'<ellipse cx="0" cy="{hang + 46}" rx="70" ry="8" fill="{T900}" opacity=".10"/>'
+                 f'<path d="M0,0 L-102,{hang} M0,0 L102,{hang}" stroke="{T700}" stroke-width="4" stroke-linecap="round" fill="none"/>'
+                 f'<path d="M-116,{hang} C-92,{hang + 48} 92,{hang + 48} 116,{hang} Z" fill="url(#mDish)" stroke="{T700}" stroke-width="5" stroke-linejoin="round"/>'
+                 f'<path d="M-118,{hang} H118" stroke="{T700}" stroke-width="8" stroke-linecap="round"/></g>')
+    ly = cy + hang - 42
+    for dx, col, name in ((-46, T700, "shield"), (46, GREEN, "badge")):
+        x = cx - half + dx
+        o.append(f'<ellipse cx="{x}" cy="{ly + 44}" rx="38" ry="6" fill="{T900}" opacity=".14"/>')
+        o.append(f'<circle cx="{x}" cy="{ly}" r="40" fill="{col}" stroke="#fff" stroke-width="4"/>')
+        o.append(icon(name, x, ly, 42, "#fff"))
+    x = cx + half
+    o.append(f'<circle cx="{x}" cy="{ly - 2}" r="78" fill="url(#mGlowG)"/>')
+    o.append(f'<ellipse cx="{x}" cy="{ly + 46}" rx="40" ry="6" fill="{T900}" opacity=".14"/>')
+    o.append(f'<circle cx="{x}" cy="{ly - 2}" r="44" fill="{INK}" stroke="{GREEN_L}" stroke-width="6"/>')
+    o.append(icon("pulse", x, ly - 2, 46, "#fff"))
+    o.append(stack_chip(cx - half, cy + hang + 108, "Approved", "+ Authorized"))
+    o.append(chip(cx + half, cy + hang + 108, "Actual", 31, 52))
+    return "".join(o)
+
+
+def build_ring():
+    out = [f'<circle cx="{RC[0]}" cy="{RC[1]}" r="{RR + 150}" fill="url(#mHalo)"/>']
+    out.append(f'<circle cx="{RC[0]}" cy="{RC[1]}" r="{RR - 128}" fill="none" stroke="{T300}" stroke-width="2.5" stroke-dasharray="2 15" stroke-linecap="round" opacity=".7"/>')
+    out.append(ring_arcs())
+    out.append(balanced_scale())
+    out.append(ring_nodes())
+    return defs() + "".join(out)
+
+
 def header_art(w=2160, h=800):
     rnd = random.Random(5)
     pts = []
@@ -516,23 +657,29 @@ def inject(html, tag, body):
     return pat.sub(lambda m: m.group(1) + body + m.group(2), html)
 
 
+def wrap_map(inner):
+    return (f'<svg class="mapsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+            f'preserveAspectRatio="xMidYMid meet" font-family="{FONT_FAMILY}">{inner}</svg>')
+
+
+def standalone(svg):
+    out = svg.replace('<svg class="mapsvg" xmlns="http://www.w3.org/2000/svg"',
+                      '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"')
+    return '<?xml version="1.0" encoding="UTF-8"?>\n' + out.replace("<use href=", "<use xlink:href=") + "\n"
+
+
 def main():
-    map_inner = build_map()
-    map_svg = (f'<svg class="mapsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
-               f'preserveAspectRatio="xMidYMid meet" font-family="{FONT_FAMILY}">{map_inner}</svg>')
     art_svg = (f'<svg class="art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2160 800" '
                f'preserveAspectRatio="xMidYMid slice" aria-hidden="true">{header_art()}</svg>')
     with open(HTML, encoding="utf-8") as fh:
-        html = fh.read()
-    html = inject(html, "MAP", map_svg)
-    html = inject(html, "ART", art_svg)
-    with open(HTML, "w", encoding="utf-8") as fh:
-        fh.write(html)
-    standalone = map_svg.replace('<svg class="mapsvg" xmlns="http://www.w3.org/2000/svg"',
-                                 '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"')
-    standalone = standalone.replace("<use href=", "<use xlink:href=")
-    with open(OUT_SVG, "w", encoding="utf-8") as fh:
-        fh.write('<?xml version="1.0" encoding="UTF-8"?>\n' + standalone + "\n")
+        base = fh.read()
+    for target, svg_path, inner in ((HTML, OUT_SVG, build_map()), (HTML_LOOP, OUT_SVG_LOOP, build_ring())):
+        map_svg = wrap_map(inner)
+        html = inject(inject(base, "MAP", map_svg), "ART", art_svg)
+        with open(target, "w", encoding="utf-8") as fh:
+            fh.write(html)
+        with open(svg_path, "w", encoding="utf-8") as fh:
+            fh.write(standalone(map_svg))
 
 
 if __name__ == "__main__":
