@@ -53,68 +53,79 @@ CSS = """
   .band2 p { margin: 18px 0 0; font-size: 31px; font-weight: 500; color: var(--t200); }
   .band2 svg { width: 100%; height: 100%; }
   .toprow { display: flex; align-items: center; gap: 56px; margin-bottom: 0; }
-  .toprow .vk { height: 188px; width: auto; display: block; border-radius: 34px; border: 3px solid rgba(167,243,230,.55);
-    box-shadow: 0 0 0 10px rgba(94,234,212,.08), 0 26px 50px -18px rgba(0,0,0,.8), 0 0 70px rgba(45,212,191,.25); }
+  .toprow .vk { height: 150px; width: auto; display: block; filter: drop-shadow(0 8px 22px rgba(0,0,0,.45)); }
   .side { padding: 0 6px; }
   .row { gap: 0; }
   .pc { width: 378px; }
   .pc b { font-size: 37px; margin-top: 20px; letter-spacing: -.6px; white-space: nowrap; }
   .pc span { font-size: 30px; margin-top: 6px; white-space: nowrap; }
   .photo { width: 200px; height: 200px; }
+  /* ---- type scale: 138/78 display, 54 headings, 48 big items, 36 items, 30 captions, 26 small ---- */
+  .chip, .gl-h, .built .lbl, .ph small { font-size: 26px; }
+  .hero2 .sub { font-size: 54px; }
+  .goals4 b { font-size: 48px; } .goals4 small { font-size: 30px; }
+  .band2 p { font-size: 30px; }
+  .box h3, .hd b { font-size: 54px; }
+  .hd small { font-size: 30px; }
+  .ph b, .dl li, .pc b { font-size: 36px; }
+  .pc span { font-size: 30px; }
+  .tool { width: 150px; } .tool small { font-size: 26px; }
 """
 
 
 def col_card(x, y, label, sub, name, fill):
-    w, h = 226, 196
+    w, h = 240, 196
     o = [f'<rect x="{x + 3}" y="{y + 10}" width="{w}" height="{h}" rx="34" fill="{T900}" opacity=".10"/>',
          f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="34" fill="#fff" stroke="{LINE}" stroke-width="2.5"/>',
          f'<circle cx="{x + w / 2}" cy="{y + 70}" r="48" fill="{fill}"/>',
          f'<circle cx="{x + w / 2}" cy="{y + 70}" r="58" fill="none" stroke="{fill}" stroke-opacity=".22" stroke-width="6"/>',
          icon(name, x + w / 2, y + 70, 54, "#fff", 1.9),
-         text(x + w / 2, y + 156, label, 33, 800, T900, "middle", -.5),
-         text(x + w / 2, y + 184, sub, 22, 500, INK2, "middle")]
+         text(x + w / 2, y + 152, label, 38, 800, T900, "middle", -.5),
+         text(x + w / 2, y + 186, sub, 32, 500, INK2, "middle")]
     return "".join(o)
 
 
 def chevrons(cx, cy):
     o = []
-    for i, op in enumerate((.35, .65, 1)):
-        x = cx - 34 + i * 30
+    for i, op in enumerate((.5, 1)):
+        x = cx - 14 + i * 22
         o.append(f'<path d="M{x},{cy - 30} L{x + 24},{cy} L{x},{cy + 30}" fill="none" stroke="{T400}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="{op}"/>')
     return "".join(o)
 
 
 def head2(x, anchor, small, big):
-    return (text(x, 40, small, 26, 700, T600, anchor, 6) + text(x, 92, big, 46, 800, T900, anchor, -1.2))
+    return (text(x, 42, small, 33, 700, T600, anchor, 6) + text(x, 104, big, 67, 800, T900, anchor, -1.8))
 
 
 def build_flow():
-    ba.VS, ba.CS = 64, 30
+    ba.VS, ba.CS, ba.CHIPSZ, ba.TYPE2 = 89, 48, 48, True
+    ba.STAGES = [("Collect", "Sync sources", "db", T600, T800), ("Compare", "3-way check", "search", T800, T900), ("Alert", "Flag drift", "alert", RED, "#a52828"), ("Control", "Needs approval", "stamp", "#e8920a", "#9a5a00"), ("Report", "Audit-ready", "file", GREEN, "#0b6e33")]
     ring = [f'<circle cx="{ba.RC[0]}" cy="{ba.RC[1]}" r="{ba.RR + 150}" fill="url(#mHalo)"/>',
             f'<circle cx="{ba.RC[0]}" cy="{ba.RC[1]}" r="{ba.RR - 128}" fill="none" stroke="{T300}" stroke-width="2.5" stroke-dasharray="2 15" stroke-linecap="round" opacity=".7"/>',
             ba.ring_arcs(), ba.balanced_scale(), ba.ring_nodes()]
-    sc = 0.71
+    sc = 0.68
     o = []
     o.append(f'<rect x="296" y="122" width="1368" height="948" rx="52" fill="#fff" fill-opacity=".65" stroke="{LINE}" stroke-width="2.5"/>')
     o.append(f'<g transform="translate(980 677) scale({sc}) translate({-ba.RC[0]} {-ba.RC[1]})">' + "".join(ring) + "</g>")
     ys = [150, 372, 594, 816]
-    left = [("Code", "software repo", "code"), ("Changes", "change requests", "clip"), ("Hardware", "parts & BOMs", "chip"), ("Releases", "versions", "box")]
-    right = [("Dashboard", "live status", "grid"), ("Alerts", "unapproved", "alert"), ("Baselines", "approved versions", "layers"), ("Reports", "PDF audit", "file")]
+    left = [("Code", "software", "code"), ("Changes", "requests", "clip"), ("Hardware", "parts", "chip"), ("Releases", "versions", "box")]
+    right = [("Dashboard", "live", "grid"), ("Alerts", "drift", "alert"), ("Baselines", "approved", "layers"), ("Reports", "PDF", "file")]
     lf = [T700, T700, T700, T700]
     rf = [T700, RED, GREEN, T900]
     for y, (l, s_, n_), f in zip(ys, left, lf):
         o.append(col_card(0, y, l, s_, n_, f))
     for y, (l, s_, n_), f in zip(ys, right, rf):
-        o.append(col_card(1734, y, l, s_, n_, f))
-    o.append(chevrons(260, 596))
-    o.append(chevrons(1700, 596))
-    o.append(head2(0, "start", "FROM", "MULTIPLE SOURCES"))
+        o.append(col_card(1720, y, l, s_, n_, f))
+    o.append(chevrons(268, 596))
+    o.append(chevrons(1692, 596))
+    o.append(head2(0, "start", "FROM", "Many sources"))
     o.append(head2(980, "middle", "OUR SOLUTION", "One control loop"))
-    o.append(head2(1960, "end", "TO", "ACTIONABLE INSIGHTS"))
+    o.append(head2(1960, "end", "TO", "Clear insights"))
     return defs() + "".join(o)
 
 
 def band_svg():
+    ba.WT = 29
     o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 318" font-family="{ba.FONT_FAMILY}">', defs()]
     o.append(f'<g transform="translate(10 48) scale(.9)">{window(0, 0, 800, 226)}</g>')
     o.append(f'<g transform="translate(748 40) scale(.98)">{doc(0, 0)}</g>')

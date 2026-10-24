@@ -350,7 +350,7 @@ def window(x, y, w, h):
     p.append(f'<path d="M2,42 H{w - 2}" stroke="{T100}" stroke-width="2.5"/>')
     for i, c in enumerate((RED, AMBER, GREEN_L)):
         p.append(f'<circle cx="{30 + i * 22}" cy="23" r="6.5" fill="{c}"/>')
-    p.append(text(100, 32, "Live dashboard", 26, 700, T800))
+    p.append(text(100, 32, "Live dashboard", WT, 700, T800))
     for i in range(7):
         p.append(f'<rect x="20" y="{56 + i * 25}" width="24" height="17" rx="5" fill="{T700 if i == 0 else T200}"/>')
     tile_cols = [T500, T500, RED, GREEN]
@@ -489,6 +489,7 @@ def build_map():
 
 
 VS, CS = 62, 31
+CHIPSZ, WT, TYPE2 = 31, 26, False
 RC = (980, 722)
 RR, NR = 490, 88
 AMBER_D = "#e8920a"
@@ -549,8 +550,21 @@ def ring_nodes():
         out.append(f'<circle cx="{n(x)}" cy="{n(y)}" r="{NR}" fill="{color}" stroke="#fff" stroke-width="9"/>')
         out.append(icon(name, x, y, 92, "#fff", 1.9))
         bx, by = x - NR * 0.74, y - NR * 0.74
-        out.append(f'<circle cx="{n(bx)}" cy="{n(by)}" r="27" fill="#fff" stroke="{color}" stroke-width="6"/>')
-        out.append(text(bx, by + 10.5, str(k + 1), 31, 800, dark, "middle"))
+        out.append(f'<circle cx="{n(bx)}" cy="{n(by)}" r="{34 if TYPE2 else 27}" fill="#fff" stroke="{color}" stroke-width="6"/>')
+        out.append(text(bx, by + (14 if TYPE2 else 10.5), str(k + 1), 42 if TYPE2 else 31, 800, dark, "middle"))
+        if TYPE2:
+            blk = VS * 0.72 + 14 + CS * 0.9
+            if k == 0:
+                vb = y - NR - 26 - CS * 0.9 - 14
+                out.append(text(x, vb, verb, VS, 800, T900, "middle", -1.5))
+                out.append(text(x, vb + 14 + CS * 0.9, cap, CS, 500, INK2, "middle"))
+            else:
+                lx = x + NR + 36 if k in (1, 2) else x - NR - 36
+                anc = "start" if k in (1, 2) else "end"
+                vb = y - blk / 2 + VS * 0.72
+                out.append(text(lx, vb, verb, VS, 800, T900, anc, -1.5))
+                out.append(text(lx, vb + 14 + CS * 0.9, cap, CS, 500, INK2, anc))
+            continue
         if k == 0:
             out.append(text(x, y - NR - 70, verb, VS, 800, T900, "middle", -1.5))
             out.append(text(x, y - NR - 28, cap, CS, 500, INK2, "middle"))
@@ -566,11 +580,11 @@ def ring_nodes():
 
 
 def stack_chip(cx, cy, l1, l2, c1=INK, c2=GREEN):
-    w = max(tw(l1, 31), tw(l2, 31)) + 52
-    h = 88
+    w = max(tw(l1, CHIPSZ), tw(l2, CHIPSZ)) + 52
+    h = int(CHIPSZ * 2.84)
     return (f'<rect x="{n(cx - w / 2 + 2)}" y="{n(cy - h / 2 + 6)}" width="{n(w)}" height="{h}" rx="28" fill="{T900}" opacity=".10"/>'
             f'<rect x="{n(cx - w / 2)}" y="{n(cy - h / 2)}" width="{n(w)}" height="{h}" rx="28" fill="#fff" stroke="{LINE}" stroke-width="2.5"/>'
-            + text(cx, cy - 6, l1, 31, 700, c1, "middle") + text(cx, cy + 28, l2, 31, 700, c2, "middle"))
+            + text(cx, cy - CHIPSZ * 0.2, l1, CHIPSZ, 700, c1, "middle") + text(cx, cy + CHIPSZ * 0.9, l2, CHIPSZ, 700, c2, "middle"))
 
 
 def balanced_scale(cx=980, cy=650):
@@ -612,7 +626,7 @@ def balanced_scale(cx=980, cy=650):
     o.append(f'<circle cx="{x}" cy="{ly - 2}" r="44" fill="{INK}" stroke="{GREEN_L}" stroke-width="6"/>')
     o.append(icon("pulse", x, ly - 2, 46, "#fff"))
     o.append(stack_chip(cx - half, cy + hang + 108, "Approved", "+ Authorized"))
-    o.append(chip(cx + half, cy + hang + 108, "Actual", 31, 52))
+    o.append(chip(cx + half, cy + hang + 108, "Actual", CHIPSZ, int(CHIPSZ * 1.68)))
     return "".join(o)
 
 
