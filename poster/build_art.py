@@ -9,9 +9,8 @@ from PIL import ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 HTML = os.path.join(HERE, "poster.html")
-HTML_LOOP = os.path.join(HERE, "poster_loop.html")
+HTML_PLAIN = os.path.join(HERE, "poster_no_credits.html")
 OUT_SVG = os.path.join(HERE, "workflow.svg")
-OUT_SVG_LOOP = os.path.join(HERE, "workflow_loop.svg")
 FONT_FILE = "/usr/share/fonts/opentype/inter/Inter-%s.otf"
 FONT_FAMILY = "Inter, 'Segoe UI', Arial, sans-serif"
 
@@ -613,12 +612,25 @@ def balanced_scale(cx=980, cy=650):
     return "".join(o)
 
 
+RH = 1400
+
+
 def build_ring():
-    out = [f'<circle cx="{RC[0]}" cy="{RC[1]}" r="{RR + 150}" fill="url(#mHalo)"/>']
-    out.append(f'<circle cx="{RC[0]}" cy="{RC[1]}" r="{RR - 128}" fill="none" stroke="{T300}" stroke-width="2.5" stroke-dasharray="2 15" stroke-linecap="round" opacity=".7"/>')
-    out.append(ring_arcs())
-    out.append(balanced_scale())
-    out.append(ring_nodes())
+    ring = [f'<circle cx="{RC[0]}" cy="{RC[1]}" r="{RR + 150}" fill="url(#mHalo)"/>']
+    ring.append(f'<circle cx="{RC[0]}" cy="{RC[1]}" r="{RR - 128}" fill="none" stroke="{T300}" stroke-width="2.5" stroke-dasharray="2 15" stroke-linecap="round" opacity=".7"/>')
+    ring.append(ring_arcs())
+    ring.append(balanced_scale())
+    ring.append(ring_nodes())
+    out = [f'<g transform="translate(0 -112) translate({RC[0]} {RC[1]}) scale(.8) translate({-RC[0]} {-RC[1]})">' + "".join(ring) + "</g>"]
+    wx, wy = 452, 1112
+    out.append(f'<circle cx="{wx + 400}" cy="{wy + 120}" r="520" fill="url(#mHalo)"/>')
+    lk = Route(wx + 800 + 6, wy + 118).line(wx + 862, wy + 112)
+    out.append(tracks([(lk, GREEN, 12)]))
+    out.append(window(wx, wy, 800, 226))
+    out.append(doc(wx + 868, wy - 8))
+    out.append(chip(wx + 868 + 96, wy - 20, "Audit report"))
+    out.append(f'<circle cx="{wx + 4}" cy="{wy + 4}" r="30" fill="{GREEN}" stroke="#fff" stroke-width="6"/>')
+    out.append(text(wx + 4, wy + 16, "5", 34, 800, "#fff", "middle"))
     return defs() + "".join(out)
 
 
@@ -657,8 +669,8 @@ def inject(html, tag, body):
     return pat.sub(lambda m: m.group(1) + body + m.group(2), html)
 
 
-def wrap_map(inner):
-    return (f'<svg class="mapsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+def wrap_map(inner, h):
+    return (f'<svg class="mapsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {h}" '
             f'preserveAspectRatio="xMidYMid meet" font-family="{FONT_FAMILY}">{inner}</svg>')
 
 
@@ -668,18 +680,27 @@ def standalone(svg):
     return '<?xml version="1.0" encoding="UTF-8"?>\n' + out.replace("<use href=", "<use xlink:href=") + "\n"
 
 
+BUILT = ["Claude", "Python", "Docker", "Streamlit", "FastAPI", "SQLAlchemy", "Alembic", "PostgreSQL", "SQLite", "Plotly",
+         "GitHub API", "Jira API", "APScheduler", "ReportLab", "pytest", "HTML / SVG"]
+
+
+def built_html():
+    chips = "".join(f'<span class="{"ai" if c == "Claude" else ""}">{c}</span>' for c in BUILT)
+    return f'<section class="built"><div class="lbl">Built<br>with</div><div class="chips">{chips}</div></section>'
+
+
 def main():
     art_svg = (f'<svg class="art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2160 800" '
                f'preserveAspectRatio="xMidYMid slice" aria-hidden="true">{header_art()}</svg>')
     with open(HTML, encoding="utf-8") as fh:
         base = fh.read()
-    for target, svg_path, inner in ((HTML, OUT_SVG, build_map()), (HTML_LOOP, OUT_SVG_LOOP, build_ring())):
-        map_svg = wrap_map(inner)
-        html = inject(inject(base, "MAP", map_svg), "ART", art_svg)
+    map_svg = wrap_map(build_ring(), RH)
+    for target, built in ((HTML, built_html()), (HTML_PLAIN, "")):
+        html = inject(inject(inject(base, "MAP", map_svg), "ART", art_svg), "BUILT", built)
         with open(target, "w", encoding="utf-8") as fh:
             fh.write(html)
-        with open(svg_path, "w", encoding="utf-8") as fh:
-            fh.write(standalone(map_svg))
+    with open(OUT_SVG, "w", encoding="utf-8") as fh:
+        fh.write(standalone(map_svg))
 
 
 if __name__ == "__main__":
