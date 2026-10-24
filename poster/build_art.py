@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import bisect
+import json
 import math
 import os
 import random
@@ -680,13 +681,13 @@ def standalone(svg):
     return '<?xml version="1.0" encoding="UTF-8"?>\n' + out.replace("<use href=", "<use xlink:href=") + "\n"
 
 
-BUILT = ["Claude", "Python", "Docker", "Streamlit", "FastAPI", "SQLAlchemy", "Alembic", "PostgreSQL", "SQLite", "Plotly",
-         "GitHub API", "Jira API", "APScheduler", "ReportLab", "pytest", "HTML / SVG"]
-
-
 def built_html():
-    chips = "".join(f'<span class="{"ai" if c == "Claude" else ""}">{c}</span>' for c in BUILT)
-    return f'<section class="built"><div class="lbl">Built<br>with</div><div class="chips">{chips}</div></section>'
+    with open(os.path.join(HERE, "assets", "tool_icons.json"), encoding="utf-8") as fh:
+        tools = json.load(fh)
+    items = "".join(
+        f'<div class="tool"><span class="ti"><svg viewBox="0 0 24 24"><path fill="{t["color"]}" d="{t["d"]}"/></svg></span><small>{t["name"]}</small></div>'
+        for t in tools)
+    return f'<section class="built"><div class="lbl">Built<br>with</div><div class="tools">{items}</div></section>'
 
 
 def main():
