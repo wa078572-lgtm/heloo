@@ -52,8 +52,9 @@ CSS = """
   .band2 h2 span { background: linear-gradient(90deg, #86efdc, #3ddc84); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .band2 p { margin: 18px 0 0; font-size: 31px; font-weight: 500; color: var(--t200); }
   .band2 svg { width: 100%; height: 100%; }
-  .toprow { display: flex; align-items: center; gap: 70px; margin-bottom: -4px; }
-  .toprow .vk { height: 132px; width: auto; display: block; filter: drop-shadow(0 8px 20px rgba(0,0,0,.35)); }
+  .toprow { display: flex; align-items: center; gap: 56px; margin-bottom: 0; }
+  .toprow .vk { height: 188px; width: auto; display: block; border-radius: 34px; border: 3px solid rgba(167,243,230,.55);
+    box-shadow: 0 0 0 10px rgba(94,234,212,.08), 0 26px 50px -18px rgba(0,0,0,.8), 0 0 70px rgba(45,212,191,.25); }
   .side { padding: 0 6px; }
   .row { gap: 0; }
   .pc { width: 378px; }
