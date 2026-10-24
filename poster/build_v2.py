@@ -52,6 +52,14 @@ CSS = """
   .band2 h2 span { background: linear-gradient(90deg, #86efdc, #3ddc84); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .band2 p { margin: 18px 0 0; font-size: 31px; font-weight: 500; color: var(--t200); }
   .band2 svg { width: 100%; height: 100%; }
+  .toprow { display: flex; align-items: center; gap: 70px; margin-bottom: -4px; }
+  .toprow .vk { height: 132px; width: auto; display: block; filter: drop-shadow(0 8px 20px rgba(0,0,0,.35)); }
+  .side { padding: 0 6px; }
+  .row { gap: 0; }
+  .pc { width: 378px; }
+  .pc b { font-size: 37px; margin-top: 20px; letter-spacing: -.6px; white-space: nowrap; }
+  .pc span { font-size: 30px; margin-top: 6px; white-space: nowrap; }
+  .photo { width: 200px; height: 200px; }
 """
 
 
@@ -120,7 +128,7 @@ def head_html():
     return f"""<header class="hero2">
     <!--ART:begin--><!--ART:end-->
     <div class="h2l">
-      <div class="chip"><i></i>Final Year Project</div>
+      <div class="toprow"><div class="chip"><i></i>Final Year Project</div><img class="vk" src="assets/vertek_logo.png" alt="VertekAI logo"></div>
       <h1>Configuration<br>Control<br><span>Dashboard</span></h1>
       <div class="sub">for any configurable product</div>
       <div class="prods">{prods}</div>
