@@ -11,6 +11,8 @@ from PIL import ImageFont
 HERE = os.path.dirname(os.path.abspath(__file__))
 HTML = os.path.join(HERE, "poster.html")
 HTML_PLAIN = os.path.join(HERE, "poster_no_credits.html")
+HTML_SIDE = os.path.join(HERE, "poster_side.html")
+HTML_SIDE_PLAIN = os.path.join(HERE, "poster_side_no_credits.html")
 OUT_SVG = os.path.join(HERE, "workflow.svg")
 FONT_FILE = "/usr/share/fonts/opentype/inter/Inter-%s.otf"
 FONT_FAMILY = "Inter, 'Segoe UI', Arial, sans-serif"
@@ -486,6 +488,7 @@ def build_map():
     return defs() + "".join(out)
 
 
+VS, CS = 62, 31
 RC = (980, 722)
 RR, NR = 490, 88
 AMBER_D = "#e8920a"
@@ -549,16 +552,16 @@ def ring_nodes():
         out.append(f'<circle cx="{n(bx)}" cy="{n(by)}" r="27" fill="#fff" stroke="{color}" stroke-width="6"/>')
         out.append(text(bx, by + 10.5, str(k + 1), 31, 800, dark, "middle"))
         if k == 0:
-            out.append(text(x, y - NR - 70, verb, 62, 800, T900, "middle", -1.5))
-            out.append(text(x, y - NR - 28, cap, 31, 500, INK2, "middle"))
+            out.append(text(x, y - NR - 70, verb, VS, 800, T900, "middle", -1.5))
+            out.append(text(x, y - NR - 28, cap, CS, 500, INK2, "middle"))
         elif k in (1, 2):
             lx = x + NR + 36
-            out.append(text(lx, y + 4, verb, 62, 800, T900, "start", -1.5))
-            out.append(text(lx, y + 50, cap, 31, 500, INK2, "start"))
+            out.append(text(lx, y + 4, verb, VS, 800, T900, "start", -1.5))
+            out.append(text(lx, y + 50, cap, CS, 500, INK2, "start"))
         else:
             lx = x - NR - 36
-            out.append(text(lx, y + 4, verb, 62, 800, T900, "end", -1.5))
-            out.append(text(lx, y + 50, cap, 31, 500, INK2, "end"))
+            out.append(text(lx, y + 4, verb, VS, 800, T900, "end", -1.5))
+            out.append(text(lx, y + 50, cap, CS, 500, INK2, "end"))
     return "".join(out)
 
 
@@ -690,18 +693,41 @@ def built_html():
     return f'<section class="built"><div class="lbl">Built<br>with</div><div class="tools">{items}</div></section>'
 
 
+def build_side():
+    global VS, CS
+    VS, CS = 76, 38
+    ring = [f'<circle cx="{RC[0]}" cy="{RC[1]}" r="{RR + 150}" fill="url(#mHalo)"/>',
+            f'<circle cx="{RC[0]}" cy="{RC[1]}" r="{RR - 128}" fill="none" stroke="{T300}" stroke-width="2.5" stroke-dasharray="2 15" stroke-linecap="round" opacity=".7"/>',
+            ring_arcs(), balanced_scale(), ring_nodes()]
+    sc, cx, cy = 0.645, 628, 612
+    out = [f'<g transform="translate({cx} {cy}) scale({sc}) translate({-RC[0]} {-RC[1]})">' + "".join(ring) + "</g>"]
+    VS, CS = 62, 31
+    px = 1262
+    out.append(f'<rect x="{px - 34}" y="170" width="3" height="780" rx="1.5" fill="{T200}"/>')
+    out.append(f'<circle cx="{px + 340}" cy="560" r="470" fill="url(#mHalo)"/>')
+    out.append(text(px + 340, 214, "What you get", 62, 800, T900, "middle", -1.5))
+    out.append(f'<g transform="translate({px} 262) scale(0.85)">' + window(0, 0, 800, 226) + "</g>")
+    out.append(f'<path d="M{px + 340},474 V540" stroke="{GREEN}" stroke-width="11" stroke-linecap="round"/>')
+    out.append(f'<path d="M{px + 318},522 L{px + 340},548 L{px + 362},522" fill="none" stroke="{GREEN}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>')
+    out.append(f'<g transform="translate({px + 214} 580) scale(1.38)">' + doc(0, 0) + "</g>")
+    out.append(chip(px + 340 + 190, 590, "Audit report", 30, 48))
+    return defs() + "".join(out)
+
+
 def main():
     art_svg = (f'<svg class="art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2160 800" '
                f'preserveAspectRatio="xMidYMid slice" aria-hidden="true">{header_art()}</svg>')
     with open(HTML, encoding="utf-8") as fh:
         base = fh.read()
-    map_svg = wrap_map(build_ring(), RH)
-    for target, built in ((HTML, built_html()), (HTML_PLAIN, "")):
-        html = inject(inject(inject(base, "MAP", map_svg), "ART", art_svg), "BUILT", built)
+    stacked = wrap_map(build_ring(), RH)
+    side = wrap_map(build_side(), 1100)
+    for target, mp, built in ((HTML, stacked, built_html()), (HTML_PLAIN, stacked, ""),
+                              (HTML_SIDE, side, built_html()), (HTML_SIDE_PLAIN, side, "")):
+        html = inject(inject(inject(base, "MAP", mp), "ART", art_svg), "BUILT", built)
         with open(target, "w", encoding="utf-8") as fh:
             fh.write(html)
     with open(OUT_SVG, "w", encoding="utf-8") as fh:
-        fh.write(standalone(map_svg))
+        fh.write(standalone(stacked))
 
 
 if __name__ == "__main__":
