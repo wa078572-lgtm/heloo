@@ -17,11 +17,11 @@ ba.SYMBOLS.update({
 
 CSS = """
   /* ===== v2: dark hero, goals strip, three-panel flow, statement band ===== */
-  .hero2 { position: relative; overflow: hidden; color: #fff; padding: 62px 100px 118px; display: grid; grid-template-columns: 1fr 930px; gap: 20px; align-items: center;
+  .hero2 { position: relative; overflow: hidden; color: #fff; padding: 62px 100px 66px; display: grid; grid-template-columns: 1fr 760px; gap: 50px; align-items: center;
     background: radial-gradient(1100px 760px at 78% 40%, rgba(45,212,191,.38), transparent 62%), radial-gradient(900px 600px at 0% 100%, rgba(20,184,166,.18), transparent 70%),
                 linear-gradient(135deg, #021a18 0%, #05332f 55%, #0a5a53 100%); }
   .hero2 > .art { position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 0; opacity: .9; }
-  .hero2 > .h2l, .hero2 > .tablet { position: relative; z-index: 1; }
+  .hero2 > .h2l, .hero2 > .gl { position: relative; z-index: 1; }
   .hero2 h1 { font-size: 138px; line-height: .97; letter-spacing: -4.8px; font-weight: 800; margin: 28px 0 22px; }
   .hero2 h1 span { background: linear-gradient(90deg, #86efdc, #2dd4bf); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .hero2 .sub { font-size: 54px; font-weight: 500; color: rgba(255,255,255,.9); letter-spacing: -.5px; }
@@ -41,7 +41,7 @@ CSS = """
     background: linear-gradient(135deg, var(--t800), var(--t500)); box-shadow: 0 0 0 7px rgba(20,184,166,.14); }
   .gstrip b { display: block; font-size: 38px; font-weight: 800; letter-spacing: -.5px; color: var(--t900); line-height: 1.05; }
   .gstrip small { display: block; font-size: 25px; font-weight: 500; color: var(--ink2); margin-top: 3px; }
-  .flow2 { flex: 1; min-height: 0; padding: 22px 100px 0; display: flex; flex-direction: column; }
+  .flow2 { flex: 1; min-height: 0; padding: 34px 100px 0; display: flex; flex-direction: column; }
   .band2 { margin: 30px 100px 0; border-radius: 44px; overflow: hidden; position: relative; color: #fff; display: grid; grid-template-columns: 1fr 940px; align-items: center; padding: 0 56px 0 64px; height: 318px;
     background: radial-gradient(900px 400px at 85% 50%, rgba(45,212,191,.35), transparent 65%), linear-gradient(135deg, #021a18, #06403b 60%, #0a5a53);
     box-shadow: 0 34px 60px -28px rgba(2,26,24,.7); }
@@ -116,7 +116,7 @@ def band_svg():
 def head_html():
     prods = "".join(f'<span><svg class="ico"><use href="#i-{k}"/></svg></span>' for k in ("phone", "car", "plane", "heart", "factory"))
     goals = [("Track", "every item", "layers"), ("Control", "every change", "shield"), ("Detect", "drift automatically", "alert"), ("Audit", "in seconds", "file")]
-    gs = "".join(f'<div class="g"><span class="n">{i + 1}</span><div><b>{t}</b><small>{s}</small></div></div>' for i, (t, s, _) in enumerate(goals))
+    gs = "".join(f'<li data-n="0{i + 1}"><span class="gi"><svg class="ico"><use href="#i-{k}"/></svg></span><b>{t}</b><small>{s}</small></li>' for i, (t, s, k) in enumerate(goals))
     return f"""<header class="hero2">
     <!--ART:begin--><!--ART:end-->
     <div class="h2l">
@@ -125,13 +125,11 @@ def head_html():
       <div class="sub">for any configurable product</div>
       <div class="prods">{prods}</div>
     </div>
-    <figure class="tablet">
-      <div class="bezel"><img src="assets/hero_overview.png" alt="CCD dashboard showing detected drift"></div>
-      <span class="fl a"><svg class="ico"><use href="#i-alert"/></svg></span>
-      <span class="fl g"><svg class="ico"><use href="#i-shield"/></svg></span>
-    </figure>
+    <div class="gl">
+      <div class="gl-h">Project Goals</div>
+      <ul class="goals4">{gs}</ul>
+    </div>
   </header>
-  <section class="gstrip"><div class="gt">Project<br>Goals</div>{gs}</section>
 
   <main class="flow2">
     <div class="map"><!--MAP:begin--><!--MAP:end--></div>
