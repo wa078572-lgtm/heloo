@@ -52,6 +52,8 @@ CSS = """
   .band2 h2 span { background: linear-gradient(90deg, #86efdc, #3ddc84); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .band2 p { margin: 18px 0 0; font-size: 31px; font-weight: 500; color: var(--t200); }
   .band2 svg { width: 100%; height: 100%; }
+  .logos { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .logos .vk2 { height: 116px; width: auto; display: block; filter: drop-shadow(0 8px 20px rgba(0,0,0,.45)); }
   .toprow { display: flex; align-items: center; gap: 56px; margin-bottom: 0; }
   .toprow .vk { height: 150px; width: auto; display: block; filter: drop-shadow(0 8px 22px rgba(0,0,0,.45)); }
   .side { padding: 0 6px; }
@@ -140,7 +142,7 @@ def head_html():
     return f"""<header class="hero2">
     <!--ART:begin--><!--ART:end-->
     <div class="h2l">
-      <div class="toprow"><div class="chip"><i></i>Final Year Project</div><img class="vk" src="assets/vertek_logo.png" alt="VertekAI logo"></div>
+      <div class="chip"><i></i>Final Year Project</div>
       <h1>Configuration<br>Control<br><span>Dashboard</span></h1>
       <div class="sub">for any configurable product</div>
       <div class="prods">{prods}</div>
@@ -163,12 +165,14 @@ def head_html():
 
 
 def main():
-    ba.KEEP_OUT = (630, 15, 950, 225)
     with open(os.path.join(HERE, "poster.html"), encoding="utf-8") as fh:
         base = fh.read()
     a = base.index('<header class="header">')
     b = base.index("</main>") + len("</main>")
     base = base[:a] + head_html() + base[b:]
+    old = '<div class="logo"><img src="assets/cui_logo.png" alt="COMSATS University Islamabad logo"></div>'
+    assert old in base
+    base = base.replace(old, '<div class="logos">' + old + '<img class="vk2" src="assets/vertek_logo.png" alt="VertekAI logo"></div>', 1)
     base = base.replace("</style>", CSS + "</style>", 1)
     art = (f'<svg class="art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2160 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">{header_art()}</svg>')
     mp = wrap_map(build_flow(), 1130)
