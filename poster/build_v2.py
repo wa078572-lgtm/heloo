@@ -9,6 +9,8 @@ from build_art import (T50, T100, T200, T300, T400, T500, T600, T700, T800, T900
 HERE = ba.HERE
 OUT = os.path.join(HERE, "poster_v2.html")
 OUT_PLAIN = os.path.join(HERE, "poster_v2_no_credits.html")
+OUT3 = os.path.join(HERE, "poster_v3.html")
+OUT3_PLAIN = os.path.join(HERE, "poster_v3_no_credits.html")
 
 ba.SYMBOLS.update({
     "grid": '<rect x="3" y="3" width="8" height="10" rx="1.8"/><rect x="13" y="3" width="8" height="6" rx="1.8"/><rect x="13" y="11" width="8" height="10" rx="1.8"/><rect x="3" y="15" width="8" height="6" rx="1.8"/>',
@@ -166,6 +168,43 @@ def head_html():
 """
 
 
+CSS3 = """
+  /* ===== v3 footer: Department | CUI | VertekAI | students + supervisors ===== */
+  .footer3 { margin-top: 36px; position: relative; color: #fff; display: flex; align-items: center; gap: 30px; padding: 40px 64px 44px;
+    background: radial-gradient(1200px 500px at 50% 120%, rgba(45,212,191,.35), transparent 65%), linear-gradient(135deg, var(--t950), var(--t800) 70%, var(--t700)); }
+  .footer3::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: linear-gradient(90deg, var(--t500), var(--t300), var(--t500)); }
+  .footer3 .dp { width: 372px; text-align: right; flex: none; }
+  .footer3 .dp small { display: block; font-size: 30px; font-weight: 600; color: var(--t200); }
+  .footer3 .dp b { display: block; font-size: 54px; font-weight: 800; line-height: 1.04; letter-spacing: -1.5px; margin-top: 6px; }
+  .footer3 .cui { width: 262px; height: 262px; flex: none; border-radius: 50%; background: #fff; padding: 11px; box-shadow: 0 0 0 11px rgba(255,255,255,.16), 0 30px 60px -10px rgba(0,0,0,.5); }
+  .footer3 .cui img { width: 100%; height: 100%; border-radius: 50%; display: block; }
+  .footer3 .vt { height: 124px; width: auto; flex: none; filter: drop-shadow(0 8px 20px rgba(0,0,0,.45)); }
+  .footer3 .rule { width: 3px; align-self: stretch; margin: 6px 0; background: linear-gradient(rgba(167,243,230,0), rgba(167,243,230,.6), rgba(167,243,230,0)); flex: none; }
+  .footer3 .ppl { flex: 1; min-width: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 26px 20px; }
+  .footer3 .pr { display: flex; align-items: center; gap: 16px; }
+  .footer3 .ph3 { position: relative; width: 118px; height: 118px; border-radius: 50%; flex: none; overflow: hidden; border: 6px solid #fff; color: rgba(255,255,255,.72);
+    background: radial-gradient(circle at 35% 30%, #23877d, #0b5a53); display: flex; align-items: center; justify-content: center; font-size: 70px; box-shadow: 0 18px 30px -14px rgba(0,0,0,.55); }
+  .footer3 .ph3 img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+  .footer3 .pr b { display: block; font-size: 36px; font-weight: 800; letter-spacing: -.6px; line-height: 1.1; white-space: nowrap; }
+  .footer3 .pr span { display: block; font-size: 30px; font-weight: 500; color: var(--t200); margin-top: 4px; white-space: nowrap; }
+"""
+
+
+def footer3_html():
+    def p(img, name, cap):
+        return (f'<div class="pr"><div class="ph3"><svg class="ico"><use href="#i-user"/></svg><img src="assets/{img}.jpg" alt="" onerror="this.remove()"></div>'
+                f'<div><b>{name}</b><span>{cap}</span></div></div>')
+    return ('<footer class="footer3">'
+            '<div class="dp"><small>Department of</small><b>Management<br>Sciences</b></div>'
+            '<div class="cui"><img src="assets/cui_logo.png" alt="COMSATS University Islamabad logo"></div>'
+            '<img class="vt" src="assets/vertek_logo.png" alt="VertekAI logo">'
+            '<div class="rule"></div>'
+            '<div class="ppl">'
+            + p("waleed", "Waleed Ahmad", "FA23-BBD-151") + p("kumail", "Syed Kumail Abbas", "FA23-BBD-135")
+            + p("asmara", "Syeda Asmara Nisar", "Supervisor") + p("salman", "Salman Khan", "External Supervisor")
+            + '</div></footer>')
+
+
 def main():
     with open(os.path.join(HERE, "poster.html"), encoding="utf-8") as fh:
         base = fh.read()
@@ -178,8 +217,12 @@ def main():
     base = base.replace("</style>", CSS + "</style>", 1)
     art = (f'<svg class="art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2160 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">{header_art()}</svg>')
     mp = wrap_map(build_flow(), 1130)
-    for target, built in ((OUT, built_html()), (OUT_PLAIN, "")):
+    for target, built, v3 in ((OUT, built_html(), False), (OUT_PLAIN, "", False), (OUT3, built_html(), True), (OUT3_PLAIN, "", True)):
         html = inject(inject(inject(inject(base, "MAP", mp), "ART", art), "BUILT", built), "BAND", band_svg())
+        if v3:
+            a = html.index('<footer class="footer">'); b = html.index('</footer>', a) + len('</footer>')
+            html = html[:a] + footer3_html() + html[b:]
+            html = html.replace('</style>', CSS3 + '</style>', 1)
         with open(target, "w", encoding="utf-8") as fh:
             fh.write(html)
 
