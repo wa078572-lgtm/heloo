@@ -156,7 +156,7 @@ def head_html():
   </main>
 
   <section class="band2">
-    <div><div class="bar"></div><h2>A smarter way to<br><span>control any product</span></h2><p>Web dashboard &nbsp;|&nbsp; Python &nbsp;|&nbsp; Automation</p></div>
+    <div><div class="bar"></div><h2>Nothing changes<br><span>without a trace.</span></h2><p>Every item &nbsp;&middot;&nbsp; Every change &nbsp;&middot;&nbsp; Every approval</p></div>
     <div><!--BAND:begin--><!--BAND:end--></div>
   </section>
 """
