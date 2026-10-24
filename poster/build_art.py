@@ -652,6 +652,9 @@ def build_ring():
     return defs() + "".join(out)
 
 
+KEEP_OUT = None
+
+
 def header_art(w=2160, h=800):
     rnd = random.Random(5)
     pts = []
@@ -666,11 +669,20 @@ def header_art(w=2160, h=800):
         for j in sorted(range(len(pts)), key=lambda k: math.dist(p, pts[k]))[1:4]:
             if math.dist(p, pts[j]) < 320:
                 edges.add(tuple(sorted((i, j))))
+    keep_out = KEEP_OUT
+
+    def clear(x, y):
+        return not (keep_out and keep_out[0] <= x <= keep_out[2] and keep_out[1] <= y <= keep_out[3])
+
     out = ['<defs><radialGradient id="aGlow"><stop offset="0" stop-color="#5eead4" stop-opacity=".55"/><stop offset="1" stop-color="#5eead4" stop-opacity="0"/></radialGradient></defs>']
     for i, j in sorted(edges):
+        if any(clear(pts[i][0] + (pts[j][0] - pts[i][0]) * t / 24, pts[i][1] + (pts[j][1] - pts[i][1]) * t / 24) is False for t in range(25)):
+            continue
         out.append(f'<line x1="{n(pts[i][0])}" y1="{n(pts[i][1])}" x2="{n(pts[j][0])}" y2="{n(pts[j][1])}" stroke="#a7f3e6" stroke-opacity=".16" stroke-width="2"/>')
     bright = set(rnd.sample(range(len(pts)), 9))
     for i, (x, y) in enumerate(pts):
+        if not clear(x, y):
+            continue
         if i in bright:
             out.append(f'<circle cx="{n(x)}" cy="{n(y)}" r="34" fill="url(#aGlow)"/>')
             out.append(f'<circle cx="{n(x)}" cy="{n(y)}" r="14" fill="none" stroke="#5eead4" stroke-opacity=".55" stroke-width="2"/>')

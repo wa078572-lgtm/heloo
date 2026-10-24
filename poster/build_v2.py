@@ -163,6 +163,7 @@ def head_html():
 
 
 def main():
+    ba.KEEP_OUT = (630, 15, 950, 225)
     with open(os.path.join(HERE, "poster.html"), encoding="utf-8") as fh:
         base = fh.read()
     a = base.index('<header class="header">')
